@@ -1,0 +1,132 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2023 Ticks <ticks.cc@gmail.com>
+##
+## Take screenshot script
+##
+
+time=$(date +%Y-%m-%d-%H-%M-%S)
+SAVEDIR="$(xdg-user-dir PICTURES)/Screenshots"
+SAVEFILE="${SAVEDIR}/Screenshot_${time}.png"
+
+send_notify() {
+	if [[ "$1" == "1" ]]; then
+		dunstify -u low -h string:x-dunst-stack-tag:obscreenshot "Image saved at ${SAVEFILE}"
+	else
+		dunstify -u low -h string:x-dunst-stack-tag:obscreenshot "Image Copied to clipboard"
+	fi
+}
+
+area_output() {
+	slurp -or
+}
+
+area_active_output() {
+	local active_workspace=$(hyprctl -j activeworkspace)
+	local monitors=$(hyprctl -j monitors)
+	local current_monitor="$(echo $monitors | jq -r 'first(.[] | select(.activeWorkspace.id == '$(echo $active_workspace | jq -r '.id')'))')"
+	echo $current_monitor | jq -r '"\(.x),\(.y) \(.width)x\(.height)"'
+}
+
+area_selected_output() {
+	local monitor=$(hyprctl -j monitors | jq -r '.[] | select(.name == "'$(echo $1)'")')
+	echo $monitor | jq -r '"\(.x),\(.y) \(.width)x\(.height)"'
+}
+
+area_region() {
+	slurp -d
+}
+
+area_window() {
+	local monitors=$(hyprctl -j monitors)
+	local clients=$(hyprctl -j clients | jq -r '[.[] | select(.workspace.id | contains('$(echo $monitors | jq -r 'map(.activeWorkspace.id) | join(",")')'))]')
+	local boxes="$(echo $clients | jq -r '.[] | "\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1]) \(.title)"')"
+	slurp -r <<<"$boxes"
+}
+
+area_active_window() {
+	local active_window=$(hyprctl -j activewindow)
+	local box=$(echo $active_window | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')
+	echo "$box"
+}
+
+trim_area() {
+	local geometry="${1}"
+	local xy_str=$(echo "${geometry}" | cut -d' ' -f1)
+	local wh_str=$(echo "${geometry}" | cut -d' ' -f2)
+	local x=$(echo "${xy_str}" | cut -d',' -f1)
+	local y=$(echo "${xy_str}" | cut -d',' -f2)
+	local width=$(echo "${wh_str}" | cut -dx -f1)
+	local height=$(echo "${wh_str}" | cut -dx -f2)
+
+	local max_width=$(hyprctl monitors -j | jq -r '[.[] | (.x + .width)] | max')
+	local max_height=$(hyprctl monitors -j | jq -r '[.[] | (.y + .height)] | max')
+
+	local cropped_x=$x
+	local cropped_y=$y
+	local cropped_width=$width
+	local cropped_height=$height
+
+	if ((x + width > max_width)); then
+		cropped_width=$((max_width - x))
+	fi
+	if ((y + height > max_height)); then
+		cropped_height=$((max_height - y))
+	fi
+
+	if ((x < 0)); then
+		cropped_x=0
+		cropped_width=$((cropped_width + x))
+	fi
+	if ((y < 0)); then
+		cropped_y=0
+		cropped_height=$((cropped_height + y))
+	fi
+
+	printf "%s,%s %sx%s\n" \
+		"${cropped_x}" "${cropped_y}" \
+		"${cropped_width}" "${cropped_height}"
+}
+
+save_area() {
+	local cropped_geometry=$(trim_area "${1}")
+	local output=""
+
+	if [ $CLIPBOARD -eq 0 ]; then
+		mkdir -p "$SAVEDIR"
+		grim -g "${cropped_geometry}" "$SAVEFILE"
+		output="$SAVEFILE"
+		wl-copy <"$output"
+		send_notify 1
+	else
+		wl-copy < <(grim -g "${cropped_geometry}" -)
+		send_notify 0
+	fi
+}
+
+begin() {
+	if [[ "$1" == "--region" ]]; then
+		local area=$(area_region)
+	elif [[ "$1" == "--active-window" ]]; then
+		local area=$(area_active_window)
+	elif [[ "$1" == "--window" ]]; then
+		local area=$(area_window)
+	elif [[ "$1" == "--output" ]]; then
+		local area=$(area_output)
+	elif [[ "$1" == "--active-output" ]]; then
+		local area=$(area_active_output)
+	elif [[ "$1" == "--select-output" ]]; then
+		local area=$(area_selected_output)
+	else
+		local area=$(area_region)
+	fi
+
+	save_area "${area}"
+}
+
+CLIPBOARD=0
+if [[ "$2" == "--clipboard-only" ]]; then
+	CLIPBOARD=1
+fi
+
+begin "$1"

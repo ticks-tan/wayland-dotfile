@@ -1,0 +1,9 @@
+show=drun
+width=750
+height=400
+always_parse_args=true
+show_all=false
+insensitive=true
+allow_images=true
+normal_window=true
+allow_markup=true

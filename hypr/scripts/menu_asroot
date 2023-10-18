@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2023 Ticks <ticks.cc@gmail.com>
+##
+## Run as root script
+##
+
+dir="${HOME}/.config/hypr"
+rootdir="/root/.config/hypr"
+menu_dir="${dir}/menu/rofi"
+menu_style="${menu_dir}/asroot.rasi"
+
+prompt="Root"
+msg="Run Applications As Root"
+term="alacritty --class alacritty-float,alacritty-float --config-file=${rootdir}/term/alacritty/alacritty.yml"
+
+opt1=" Alacritty"
+opt2=" Thunar"
+opt3=" Geany"
+opt4=" NeoVim"
+
+root_cmd() {
+	SUDO_ASKPASS=${dir}/scripts/menu_askpass sudo -A $1
+}
+
+menu_cmd() {
+	rofi -dmenu \
+		-markup-rows \
+		-p "${prompt}" \
+		-mesg "${msg}" \
+		-theme ${menu_style}
+}
+
+run_menu() {
+	echo -e "${opt1}\n${opt2}\n${opt3}\n${opt4}" | menu_cmd
+}
+
+run_cmd() {
+	if [[ "$1" == "--opt1" ]]; then
+		root_cmd "${term}"
+	elif [[ "$1" == "--opt2" ]]; then
+		root_cmd 'dbus-run-session thunar'
+	elif [[ "$1" == "--opt3" ]]; then
+		root_cmd geany
+	elif [[ "$1" == "--opt4" ]]; then
+		root_cmd "${term} -e nvim"
+	fi
+}
+
+chosen="$(run_menu)"
+case ${chosen} in
+${opt1})
+	run_cmd --opt1
+	;;
+${opt2})
+	run_cmd --opt2
+	;;
+${opt3})
+	run_cmd --opt3
+	;;
+${opt4})
+	run_cmd --opt4
+	;;
+esac

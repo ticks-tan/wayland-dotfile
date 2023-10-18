@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2023 Ticks <ticks.cc@gmail.com>
+##
+## Get Root Password
+##
+
+menu_dir="${HOME}/.config/hypr/menu/rofi"
+menu_style="${menu_dir}/askpass.rasi"
+
+rofi -dmenu \
+	-p "Root Password" \
+	-password \
+	-theme "${menu_style}" \
+	2>/dev/null

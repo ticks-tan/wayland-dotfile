@@ -1,0 +1,26 @@
+## Copyright (C) 2023 Ticks <ticks.cc@gmail.com>
+##
+## Font configuration for alacritty
+##
+
+font:
+  # Normal font face
+  normal:
+    family: "Hack Nerd Font"
+
+  # Bold font face
+  bold:
+    family: "Hack Nerd Font"
+
+  # Italic font face
+  italic:
+    family: "Hack Nerd Font"
+
+  # Bold italic font face
+  bold_italic:
+    family: "Hack Nerd Font"
+
+  # Point size
+  size: 14
+
+

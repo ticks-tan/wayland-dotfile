@@ -1,0 +1,39 @@
+{
+  "layer": "top",
+  "position": "top",
+  "margin-top": 0,
+  "margin-left": 0,
+  "margin-right": 0,
+  "id": "waybar-top",
+  "classname": "waybar-top",
+  "include": [
+    "~/.config/hypr/bar/waybar/modules.json",
+    "~/.config/hypr/bar/waybar/custom.json"
+  ],
+  "modules-left": [
+    "custom/logo",
+    "custom/dot-alt",
+    "hyprland/workspaces",
+    "custom/dot",
+    "cpu"
+  ],
+  "modules-center": [
+    "clock",
+    "custom/dot-alt",
+    "mpd"
+  ],
+  "modules-right": [
+    "network",
+    "custom/dot",
+    "pulseaudio",
+    "custom/dot",
+    "backlight",
+    "custom/dot",
+    "battery",
+    "custom/dot",
+    "custom/sysmenu",
+    "custom/dot-alt",
+    "tray"
+  ],
+  "height": 40
+}

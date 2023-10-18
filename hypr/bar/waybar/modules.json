@@ -1,0 +1,99 @@
+{
+  "hyprland/workspaces": {
+    "on-click": "activate",
+    "all-outputs": true,
+    "active-only": false,
+    "format": "{icon}",
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": "",
+      "6": "",
+      "7": "",
+      "8": "",
+      "default": ""
+    },
+    "sort-by": "number",
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": [],
+      "6": [],
+      "7": [],
+      "8": []
+    }
+  },
+  "hyprland/window": {
+    "format": "{title}",
+    "max-length": 25
+  },
+  "backlight": {
+    "device": "amdgpu_bl1",
+    "format": "<span font-family='Symbols Nerd Font'>{icon}</span> {percent}%",
+    "format-icons": [
+      "", "", "", "", "",
+      "", "", "", "", ""
+    ],
+    "scroll-step": 5
+  },
+  "battery": {
+    "bat": "BAT0",
+    "adapter": "AC0",
+    "full-at": 99,
+    "format-time": "{H}:{M}",
+    "format": "<span font-family='Symbols Nerd Font'>{icon}</span> {capacity}%",
+    "format-icons": [
+      "", "", "", "", ""
+    ]
+  },
+  "cpu": {
+    "format": "<span font-family='Symbols Nerd Font'>{icon}</span> {usage}%",
+    "format-icons": [ "" ],
+    "interval": 10
+  },
+  "clock": {
+    "interval": 60,
+    "format": "<span font-family='Symbols Nerd Font'> </span>{:%H:%M}",
+    "tooltip-format": "{:%Y-%m-%d %H:%M}"
+  },
+  "mpd": {
+    "max-length": 25,
+    "format": "<span font-family='Symbols Nerd Font'> </span> {title} - {artist}",
+    "format-stopped": "<span font-family='Symbols Nerd Font'> </span> Stopped",
+    "format-paused": "<span font-family='Symbols Nerd Font'> </span> Paused",
+    "on-click": "mpc toggle",
+    "on-scroll-up": "mpc prev",
+    "on-scroll-down": "mpc next",
+    "on-click-right": "~/.config/hypr/scripts/menu_music"
+  },
+  "network": {
+    "interval": 30,
+    "format-wifi": "<span font-family='Symbols Nerd Font'>直</span> {essid}",
+    "format-ethernet": "<span font-family='Symbols Nerd Font'> </span> {essid}",
+    "format-disconnected": "<span font-family='Symbols Nerd Font'>睊</span> Disconnect",
+    "tooltip-format": "{bandwidthUpBytes} | {bandwidthDownBytes}",
+    "on-click": "networkmanager_dmenu"
+  },
+  "pulseaudio": {
+    "scroll-step": 5,
+    "format": "<span font-family='Symbols Nerd Font'>{icon}</span> {volume}%",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["奄", "奔", "墳", "墳"]
+    },
+    "format-muted": "婢"
+  },
+  "tray": {
+    "icon-size": 20,
+    "spacing": 5
+  }
+}

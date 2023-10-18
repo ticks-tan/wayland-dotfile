@@ -1,0 +1,20 @@
+{
+  "custom/dot": {
+    "format": "",
+    "tooltip": false
+  },
+  "custom/dot-alt": {
+    "format": "",
+    "tooltip": false
+  },
+  "custom/sysmenu": {
+    "format": "襤",
+    "tooltip": false,
+    "on-click": "~/.config/hypr/scripts/menu_powermenu"
+  },
+  "custom/logo": {
+    "format": "A",
+    "tooltip": false,
+    "on-click": "~/.config/hypr/scripts/menu_launcher"
+  }
+}

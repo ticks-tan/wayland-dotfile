@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2023 Ticks <ticks.cc@gmail.com>
+##
+## Start notification application
+##
+
+conf="${HOME}/.config/hypr/notification/dunst/dunstrc"
+
+if [[ $(pidof dunst) ]]; then
+	pkill dunst
+fi
+
+dunst -config ${conf} &

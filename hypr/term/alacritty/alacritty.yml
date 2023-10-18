@@ -1,0 +1,66 @@
+## Copyright (C) 2023 Ticks <ticks.cc@gmail.com>
+##
+## See more at /usr/share/doc/alacritty/example/alacritty.yml
+##
+
+## Import files (Colors, Fonts, Etc)
+## 导入其他配置文件
+import:
+  - ~/.config/hypr/term/alacritty/colors.yml
+  - ~/.config/hypr/term/alacritty/fonts.yml
+
+## Set environment variables
+## 设置环境变量
+env:
+  TERM: alacritty
+
+## Terminal window settings
+## 窗口设置
+window:
+  ## 窗口行数与列数
+  dimensions:
+    columns: 82
+    lines: 23
+
+  padding:
+    x: 10
+    y: 10
+
+  ## 窗口修饰，full: 有边框+标题栏，none: 无边框+标题栏
+  decorations: none
+  ## 启动模式 (Fullscreen, Maximized, Windowed)
+  startup_mode: Windowed
+  ## 动态窗口标题
+  dynamic_title: true
+
+  ## scrolling
+  ## 历史记录行数
+  history: 5000
+  ## 每次滚动行数
+  multiplier: 5
+  ## 自动滚动到最新行
+  auto_scroll: true
+
+  ## Background opacity
+  ## 背景透明度 
+  opacity: 1.0
+
+cursor:
+  style:
+    ## 光标样式 ( ▇ Block, _ Underline, | Beam)
+    shape: Block
+    ## 光标闪烁
+    blinking: On
+
+  ## 当窗口未聚焦时，光标是否显示为空心框
+  unfocused_hollow: false
+
+## Live config reload
+## 自动刷新配置文件
+live_config_reload: true
+## tab size
+## tab键宽度
+tabspaces: 4
+
+## 启动目录
+# working_directory: None

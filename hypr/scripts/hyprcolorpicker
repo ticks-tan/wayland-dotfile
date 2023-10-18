@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2023 Ticks <ticks.cc@gmail.com>
+##
+## Pick color script
+##
+
+notify_cmd='dunstify -u low -h string:x-dunst-stack-tag:obcolorpicker'
+
+copy_color() {
+	color=$(hyprpicker)
+	echo "${color}" | wl-copy
+	${notify_cmd} "${color}"
+}
+
+copy_color

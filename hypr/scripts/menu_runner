@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2023 Ticks <ticks.cc@gmail.com>
+##
+## Run program script
+##
+
+dir="${HOME}/.config/hypr/menu/rofi"
+menu_style="${dir}/runner.rasi"
+
+rofi -theme "${menu_style}" -show run 2>/dev/null

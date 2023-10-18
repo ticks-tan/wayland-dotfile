@@ -1,0 +1,12 @@
+
+Net/ThemeName "Catppuccin-Macchiato"
+Net/IconThemeName "Win11"
+Gtk/CursorThemeName "Catppuccin-Macchiato-Light"
+Net/EnableEventSounds "0"
+Net/EnableInputFeedbackSounds "0"
+Xft/DPI "-1"
+Xft/Hinting 1
+Xft/HintStyle "hintslight"
+Xft/Antialias 1
+Xft/RGBA "rgb"
+Xft/lcdfilter "lcdlight"

@@ -1,0 +1,75 @@
+colors:
+    # Default colors
+    primary:
+        background: "#24273a" # base
+        foreground: "#cad3f5" # text
+        # Bright and dim foreground colors
+        dim_foreground: "#cad3f5" # text
+        bright_foreground: "#cad3f5" # text
+
+    # Cursor colors
+    cursor:
+        text: "#24273a" # base
+        cursor: "#f4dbd6" # rosewater
+    vi_mode_cursor:
+        text: "#24273a" # base
+        cursor: "#b7bdf8" # lavender
+
+    # Search colors
+    search:
+        matches:
+            foreground: "#24273a" # base
+            background: "#a5adcb" # subtext0
+        focused_match:
+            foreground: "#24273a" # base
+            background: "#a6da95" # green
+        footer_bar:
+            foreground: "#24273a" # base
+            background: "#a5adcb" # subtext0
+
+    # Keyboard regex hints
+    hints:
+        start:
+            foreground: "#24273a" # base
+            background: "#eed49f" # yellow
+        end:
+            foreground: "#24273a" # base
+            background: "#a5adcb" # subtext0
+
+    # Selection colors
+    selection:
+        text: "#24273a" # base
+        background: "#f4dbd6" # rosewater
+
+    # Normal colors
+    normal:
+        black: "#494d64" # surface1
+        red: "#ed8796" # red
+        green: "#a6da95" # green
+        yellow: "#eed49f" # yellow
+        blue: "#8aadf4" # blue
+        magenta: "#f5bde6" # pink
+        cyan: "#8bd5ca" # teal
+        white: "#b8c0e0" # subtext1
+
+    # Bright colors
+    bright:
+        black: "#5b6078" # surface2
+        red: "#ed8796" # red
+        green: "#a6da95" # green
+        yellow: "#eed49f" # yellow
+        blue: "#8aadf4" # blue
+        magenta: "#f5bde6" # pink
+        cyan: "#8bd5ca" # teal
+        white: "#a5adcb" # subtext0
+
+    # Dim colors
+    dim:
+        black: "#494d64" # surface1
+        red: "#ed8796" # red
+        green: "#a6da95" # green
+        yellow: "#eed49f" # yellow
+        blue: "#8aadf4" # blue
+        magenta: "#f5bde6" # pink
+        cyan: "#8bd5ca" # teal
+        white: "#b8c0e0" # subtext1

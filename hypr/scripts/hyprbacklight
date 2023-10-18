@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2023 Ticks <ticks.cc@gmail.com>
+##
+## Manager brightness script
+##
+
+CARD=$(ls /sys/class/backlight | head -n 1)
+
+notify_cmd='dunstify -u low -h string:x-dunst-stack-tag:obbacklight'
+
+get_backlight() {
+	if [[ "${CARD}" == *"intel_"* ]]; then
+		NUM=$(xbacklight -get)
+		LIGHT=${NUM%.*}
+	else
+		LIGHT=$(printf "%.0f\n" $(light -G))
+	fi
+	echo "${LIGHT}"
+}
+
+notify_user() {
+	${notify_cmd} "Backlight: $(get_backlight)%"
+}
+
+inc_backlight() {
+	if [[ "${CARD}" == *"intel_"* ]]; then
+		xbacklight -inc 10 && notify_user
+	else
+		light -A 10 && notify_user
+	fi
+}
+
+dec_backlight() {
+	if [[ "${CARD}" == *"intel_"* ]]; then
+		xbacklight -dec 10 && notify_user
+	else
+		light -U 10 && notify_user
+	fi
+}
+
+if [[ "$1" == "--get" ]]; then
+	get_backlight
+elif [[ "$1" == "--inc" ]]; then
+	inc_backlight
+elif [[ "$1" == "--dec" ]]; then
+	dec_backlight
+else
+	get_backlight
+fi

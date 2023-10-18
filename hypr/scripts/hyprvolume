@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2023 Ticks <ticks.cc@gmail.com>
+##
+## Set volume in hyprland
+##
+
+notify_cmd='dunstify -u low -h string:x-dunst-stack-tag:obvolume'
+
+get_volume() {
+	echo "$(pactl get-sink-volume @DEFAULT_SINK@ | head -1 | awk -F/ '{print $2}' | sed -e 's/\s//g')"
+}
+
+get_icon() {
+	echo ""
+}
+
+notify_user() {
+	${notify_cmd} "Volume: $(get_volume)"
+}
+
+inc_volume() {
+	pactl set-sink-volume @DEFAULT_SINK@ +5% && notify_user
+}
+
+dec_volume() {
+	pactl set-sink-volume @DEFAULT_SINK@ -5% && notify_user
+}
+
+toggle_volume() {
+	if [[ "$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')" == "yes" ]]; then
+		pactl set-sink-mute @DEFAULT_SINK@ toggle && ${notify_cmd} "Mute"
+	else
+		pactl set-sink-mute @DEFAULT_SINK@ toggle && ${notify_cmd} "UnMute"
+	fi
+}
+
+if [[ -x $(which pactl) ]]; then
+	if [[ "$1" == "--get" ]]; then
+		get_volume
+	elif [[ "$1" == "--inc" ]]; then
+		inc_volume
+	elif [[ "$1" == "--dec" ]]; then
+		dec_volume
+	elif [[ "$1" == "--toggle" ]]; then
+		toggle_volume
+	else
+		echo "$(get_volume)"
+	fi
+else
+	${notify_cmd} "'pactl' not found !"
+fi
