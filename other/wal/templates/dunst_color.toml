@@ -1,0 +1,17 @@
+[urgency_low]
+timeout = 2
+background  = "{background}"
+foreground  = "{foreground}"
+frame_color = "{color5}"
+
+[urgency_normal]
+timeout = 5
+background  = "{background}"
+foreground  = "{foreground}"
+frame_color = "{color5}"
+
+[urgency_critical]
+timeout = 0
+background  = "{background}"
+foreground  = "{foreground}"
+frame_color = "{color5}"

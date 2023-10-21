@@ -2,11 +2,11 @@
 
 ### 截图：
 
-![img1](./imgs/Screenshot_1.png)
+![img1](./imgs/Screenshot_4.png)
 
-![img2](./imgs/Screenshot_2.png)
+![img2](./imgs/Screenshot_5.png)
 
-![img3](./imgs/Screenshot_3.png)
+![img3](./imgs/Screenshot_6.png)
 
 ### 安装要求
 
@@ -49,6 +49,8 @@
 
 - **字体**：`Symbols Nerd Font` `JetBrains Nerd Font` `Sarasa UI SC` `Iosevka Nerd Font` `Hack Nerd Font`
 
+- **动态取色**： `python-pywal`
+
 ### 安装说明
 
 大部分软件都可以在Archlinux官方仓库下载到，字体请到下方链接下载或者仓库 fonts 目录下下载：
@@ -82,6 +84,12 @@ mv ~/.config/hypr ~/.config/hypr-back
 
 ```bash
 cp -r hypr ~/.config/
+
+## 拷贝其他配置
+cp -r other/xxx ~/.config/xxx
+
+## 如果需要壁纸动态取色，必须拷贝 other/wal 到 ~/.config/ !!!
+cp -r other/wal ~/.config/
 ```
 
 4. 启动 hyprland 查看效果
@@ -95,8 +103,6 @@ cp -r hypr ~/.config/
 第一次使用请先进行主题配置，默认主题你可能没有安装！
 
 默认配色、GTK主题、光标主题均为 `catppuccin` ，可以到 [此处](https://github.com/catppuccin/catppuccin) 查看关于 `Catppuccin` 所有配色主题 。
-
-现已支持壁纸动态取色，请提前安装好 `python-pywal` ！！！
 
 ### 键盘绑定
 
