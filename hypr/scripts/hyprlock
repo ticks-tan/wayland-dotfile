@@ -13,9 +13,9 @@ else
 	source "${DIR}/custom/theme.sh"
 fi
 
-wp="${wallpaper_path}"
+wp="$(echo ${wallpaper_path} | sed -e "s|^~\(.*\)|${HOME}\1|g")"
 
-if [ -e "$wp" ]; then
+if [ -f "$wp" ]; then
 	swaylock -i "$wp"
 else
 	swaylock --color '#23273a'

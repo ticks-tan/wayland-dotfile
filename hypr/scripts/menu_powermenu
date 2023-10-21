@@ -74,11 +74,11 @@ confirm_run() {
 # Execute Command
 run_cmd() {
 	if [[ "$1" == '--opt1' ]]; then
-		swaylock --color=#23273a
+		confirm_run "${DIR}/scripts/hyprlock"
 	elif [[ "$1" == '--opt2' ]]; then
 		confirm_run 'hyprctl dispatch exit'
 	elif [[ "$1" == '--opt3' ]]; then
-		confirm_run 'mpc -q pause' 'pactl set-sink-mute @DEFAULT_SINK@ on' 'swaylock --color=#23273a'
+		confirm_run 'mpc -q pause' 'pactl set-sink-mute @DEFAULT_SINK@ on' "${DIR}/scripts/hyprlock"
 	elif [[ "$1" == '--opt4' ]]; then
 		confirm_run 'systemctl reboot'
 	elif [[ "$1" == '--opt5' ]]; then

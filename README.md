@@ -96,6 +96,8 @@ cp -r hypr ~/.config/
 
 默认配色、GTK主题、光标主题均为 `catppuccin` ，可以到 [此处](https://github.com/catppuccin/catppuccin) 查看关于 `Catppuccin` 所有配色主题 。
 
+现已支持壁纸动态取色，请提前安装好 `python-pywal` ！！！
+
 ### 键盘绑定
 
 下面是一些主要的绑定，具体请查看 `hyprland.conf` 

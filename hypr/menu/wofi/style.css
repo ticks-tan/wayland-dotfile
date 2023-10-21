@@ -1,51 +1,38 @@
-/**
- * colors from catppuccin
- */
+@define-color background  #24273a;
+@define-color foreground  #cad3f5;
 
-@define-color base   #24273a;
-@define-color mantle #1e2030;
-@define-color crust  #181926;
+@define-color color0      #181926;
+@define-color color1      #ed8796;
+@define-color color2      #a6da95;
+@define-color color3      #eed49f;
+@define-color color4      #8aadf4;
+@define-color color5      #b7bdf8;
+@define-color color6      #8bd5ca;
+@define-color color7      #cad3f5;
+@define-color color8      #181926;
+@define-color color9      #ed8796;
+@define-color color10     #a6da95;
+@define-color color11     #eed49f;
+@define-color color12     #8aadf4;
+@define-color color13     #b7bdf8;
+@define-color color14     #8bd5ca;
+@define-color color15     #cad3f5;
 
-@define-color text     #cad3f5;
-@define-color subtext0 #a5adcb;
-@define-color subtext1 #b8c0e0;
 
-@define-color surface0 #363a4f;
-@define-color surface1 #494d64;
-@define-color surface2 #5b6078;
-
-@define-color overlay0 #6e738d;
-@define-color overlay1 #8087a2;
-@define-color overlay2 #939ab7;
-
-@define-color blue      #8aadf4;
-@define-color lavender  #b7bdf8;
-@define-color sapphire  #7dc4e4;
-@define-color sky       #91d7e3;
-@define-color teal      #8bd5ca;
-@define-color green     #a6da95;
-@define-color yellow    #eed49f;
-@define-color peach     #f5a97f;
-@define-color maroon    #ee99a0;
-@define-color red       #ed8796;
-@define-color mauve     #c6a0f6;
-@define-color pink      #f5bde6;
-@define-color flamingo  #f0c6c6;
-@define-color rosewater #f4dbd6;
 
 * {
     font-family: 'JetBrains Mono Nerd Font';
     font-size: 16px;
     font-weight: bold;
-    color: @text;
+    color: @foreground;
 }
 
 /* Window Style */
 window {
-    background-color: @base;
+    background-color: @background;
     margin: 0px;
     padding: 10px;
-    border: 1px solid @lavender;
+    border: 1px solid @color5;
     border-radius: 12px;
     animation: slideIn 0.5s ease-in-out both;
 }
@@ -64,7 +51,7 @@ window {
     margin: 5px;
     padding: 10px;
     border: none;
-    background-color: @base;
+    background-color: @background;
 }
 
 #input {
@@ -72,8 +59,8 @@ window {
     padding: 10px;
     border: none;
     border-radius: 8px;
-    color: @mauve;
-    background-color: @surface0;
+    color: @color5;
+    background-color: alpha(@color7, 0.4);
 }
 
 #scroll {
@@ -86,7 +73,7 @@ window {
     margin: 5px;
     padding: 10px;
     border: none;
-    color: @text;
+    color: @foreground;
 }
 
 #inner-box {
@@ -101,9 +88,10 @@ window {
 }
 
 #entry:selected {
-    background-color: @surface0;
+    background-color: alpha(@color7, 0.4);
 }
 
 #entry:selected #text {
-    color: @mauve;
+    color: @color5;
 }
+

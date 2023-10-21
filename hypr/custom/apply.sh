@@ -9,19 +9,40 @@ if [[ ! -f "${THEME_DIR}/system.sh" ]]; then
 	echo "${THEME_DIR}/system.sh not found"
 	exit 1
 fi
+if [[ ! -f "${THEME_DIR}/color.sh" ]]; then
+	echo "${THEME_DIR}/color.sh not found"
+	exit 1
+fi
 if [[ ! -f "${THEME_DIR}/theme.sh" ]]; then
 	echo "${THEME_DIR}/theme.sh not found"
 	exit 1
 fi
 
 source ${THEME_DIR}/system.sh
+source ${THEME_DIR}/color.sh
 source ${THEME_DIR}/theme.sh
 
+PATH_CLS="${HOME}/.cache/wal"
 PATH_CONF="${HOME}/.config"
 PATH_BAR="${HYPRDIR}/bar/waybar"
 PATH_TERM="${HYPRDIR}/term/alacritty"
 PATH_MENU="${HYPRDIR}/menu/rofi"
 PATH_NOTIFY="${HYPRDIR}/notification/dunst"
+
+wallpaper_path="$(echo ${wallpaper_path} | sed -e "s|^~\(.*\)|${HOME}\1|g")"
+
+if [[ ! -f "${wallpaper_path}" ]]; then
+	echo "${wallpaper_path} not found"
+	auto_color="false"
+fi
+
+wal_cmd() {
+	if [[ "${color_scheme}" == "light" ]]; then
+		wal -i "${wallpaper_path}" -l -n -q -s -t -e
+	else
+		wal -i "${wallpaper_path}" -n -q -s -t -e
+	fi
+}
 
 apply_wallpaper() {
 	sed -i -e "s@preload=.*@preload=${wallpaper_path}@g" ${HYPRDIR}/hyprpaper.conf
@@ -29,54 +50,51 @@ apply_wallpaper() {
 }
 
 apply_bar() {
-	cat >${PATH_BAR}/color.css <<-EOF
+	if [[ "${auto_color}" != "true" ]]; then
+		cat >${PATH_BAR}/color.css <<-EOF
 
-		        @define-color base   #${base};
-		        @define-color mantle #${mantle};
-		        @define-color crust  #${crust};
+			    @define-color background   #${background};
+			    @define-color foreground   #${foreground};
 
-		        @define-color text     #${text};
-		        @define-color subtext0 #${subtext0};
-		        @define-color subtext1 #${subtext1};
+			    @define-color color0  #${color0};
+			    @define-color color1  #${color1};
+			    @define-color color2  #${color2};
+			    @define-color color3  #${color3};
+			    @define-color color4  #${color4};
+			    @define-color color5  #${color5};
+			    @define-color color6  #${color6};
+			    @define-color color7  #${color7};
 
-		        @define-color surface0 #${surface0};
-		        @define-color surface1 #${surface1};
-		        @define-color surface2 #${surface2};
-
-		        @define-color overlay0 #${overlay0};
-		        @define-color overlay1 #${overlay1};
-		        @define-color overlay2 #${overlay2};
-
-		        @define-color blue      #${blue};
-		        @define-color lavender  #${lavender};
-		        @define-color sapphire  #${sapphire};
-		        @define-color sky       #${sky};
-		        @define-color teal      #${teal};
-		        @define-color green     #${green};
-		        @define-color yellow    #${yellow};
-		        @define-color peach     #${peach};
-		        @define-color maroon    #${maroon};
-		        @define-color red       #${red};
-		        @define-color mauve     #${mauve};
-		        @define-color pink      #${pink};
-		        @define-color flamingo  #${flamingo};
-		        @define-color rosewater #${rosewater};
-	EOF
-
+			    @define-color color8   #${color8};
+			    @define-color color9   #${color9};
+			    @define-color color10  #${color10};
+			    @define-color color11  #${color11};
+			    @define-color color12  #${color12};
+			    @define-color color13  #${color13};
+			    @define-color color14  #${color14};
+			    @define-color color15  #${color15};
+		EOF
+	else
+		cp ${PATH_CLS}/waybar_color.css ${PATH_BAR}/color.css
+	fi
 }
 
 apply_menu() {
 	sed -i -e "s@font:.*@font: \"${menu_font}\";@g" ${PATH_MENU}/shared/fonts.rasi
-	cat >${PATH_MENU}/shared/colors.rasi <<-EOF
-		* {
-		    background:     #${crust};
-		    background-alt: #${mantle};
-		    foreground:     #${text};
-		    selected:       #${lavender};
-		    active:         #${green};
-		    urgent:         #${red};
-		}
-	EOF
+	if [[ "${auto_color}" != "true" ]]; then
+		cat >${PATH_MENU}/shared/colors.rasi <<-EOF
+			* {
+			     background:     #${background};
+			     background-alt: #${color8};
+			     foreground:     #${foreground};
+			     selected:       #${color5};
+			     active:         #${color3};
+			     urgent:         #${color1};
+			}
+		EOF
+	else
+		cp ${PATH_CLS}/rofi_color.rasi ${PATH_MENU}/shared/colors.rasi
+	fi
 }
 
 apply_netmenu() {
@@ -91,83 +109,78 @@ apply_terminal() {
 		-e "s@size: .*@size: ${term_font_size}@g"
 
 	# alacritty : colors
-	cat >${PATH_TERM}/colors.yml <<-_EOF_
-		colors:
-		    # Default colors
-		    primary:
-		        background: "#${base}" # base
-		        foreground: "#${text}" # text
-		        # Bright and dim foreground colors
-		        dim_foreground: "#${text}" # text
-		        bright_foreground: "#${text}" # text
+	if [[ "${auto_color}" != "true" ]]; then
+		cat >${PATH_TERM}/colors.yml <<-_EOF_
+			colors:
+			  # Default colors
+			  primary:
+			    background: "#${background}"
+			    foreground: "#${foreground}"
 
-		    # Cursor colors
-		    cursor:
-		        text: "#${base}" # base
-		        cursor: "#${rosewater}" # rosewater
-		    vi_mode_cursor:
-		        text: "#${base}" # base
-		        cursor: "#${lavender}" # lavender
+			    dim_foreground: "#${color15}"
+			    bright_foreground: "#${foreground}"
 
-		    # Search colors
-		    search:
-		        matches:
-		            foreground: "#${base}" # base
-		            background: "#${subtext0}" # subtext0
-		        focused_match:
-		            foreground: "#${base}" # base
-		            background: "#${green}" # green
-		        footer_bar:
-		            foreground: "#${base}" # base
-		            background: "#${subtext0}" # subtext0
+			  # Cursor colors
+			  cursor:
+			    text: "#${background}"
+			    cursor: "#${foreground}"
+			  vi_mode_cursor:
+			    text: "#${background}"
+			    cursor: "#${color2}"
 
-		    # Keyboard regex hints
-		    hints:
-		        start:
-		            foreground: "#${base}" # base
-		            background: "#${yellow}" # yellow
-		        end:
-		            foreground: "#${base}" # base
-		            background: "#${subtext0}" # subtext0
+			  # Search colors
+			  search:
+			    matches:
+			      foreground: "#${background}"
+			      background: "#${color8}"
+			    focused_match:
+			      foreground: "#${background}"
+			      background: "#${color2}"
+			    footer_bar:
+			      foreground: "#${background}"
+			      background: "#${color8}"
 
-		    # Selection colors
-		    selection:
-		        text: "#${base}" # base
-		        background: "#${rosewater}" # rosewater
+			  # Selection colors
+			  selection:
+			    text: "#${background}"
+			    background: "#${color3}"
 
-		    # Normal colors
-		    normal:
-		        black: "#${surface1}" # surface1
-		        red: "#${red}" # red
-		        green: "#${green}" # green
-		        yellow: "#${yellow}" # yellow
-		        blue: "#${blue}" # blue
-		        magenta: "#${pink}" # pink
-		        cyan: "#${teal}" # teal
-		        white: "#${subtext1}" # subtext1
+			  # Normal colors
+			  normal:
+			    black: "#${color0}"
+			    red: "#${color1}"
+			    green: "#${color2}"
+			    yellow: "#${color3}"
+			    blue: "#${color4}"
+			    magenta: "#${color5}"
+			    cyan: "#${color6}"
+			    white: "#${color7}"
 
-		    # Bright colors
-		    bright:
-		        black: "#${surface2}" # surface2
-		        red: "#${red}" # red
-		        green: "#${green}" # green
-		        yellow: "#${yellow}" # yellow
-		        blue: "#${blue}" # blue
-		        magenta: "#${pink}" # pink
-		        cyan: "#${teal}" # teal
-		        white: "#${subtext0}" # subtext0
+			  # Bright colors
+			  bright:
+			    black: "#${color8}"
+			    red: "#${color9}"
+			    green: "#${color10}"
+			    yellow: "#${color11}"
+			    blue: "#${color12}"
+			    magenta: "#${color13}"
+			    cyan: "#${color14}"
+			    white: "#${color15}"
 
-		    # Dim colors
-		    dim:
-		        black: "#${surface1}" # surface1
-		        red: "#${red}" # red
-		        green: "#${green}" # green
-		        yellow: "#${yellow}" # yellow
-		        blue: "#${blue}" # blue
-		        magenta: "#${pink}" # pink
-		        cyan: "#${teal}" # teal
-		        white: "#${subtext1}" # subtext1
-	_EOF_
+			  # Dim colors
+			  dim:
+			    black: "#${color8}"
+			    red: "#${color9}"
+			    green: "#${color10}"
+			    yellow: "#${color11}"
+			    blue: "#${color12}"
+			    magenta: "#${color13}"
+			    cyan: "#${color14}"
+			    white: "#${color15}"
+		_EOF_
+	else
+		cp ${PATH_CLS}/alacritty_color.yml ${PATH_TERM}/colors.yml
+	fi
 }
 
 apply_gtk() {
@@ -198,25 +211,29 @@ apply_notifyd() {
 		-e "s/frame_width = .*/frame_width = $notify_border/g"
 
 	sed -i '/urgency_low/Q' ${PATH_NOTIFY}/dunstrc
-	cat >>${PATH_NOTIFY}/dunstrc <<-_EOF_
-		[urgency_low]
-		timeout = 2
-		background = "#${base}"
-		foreground = "#${text}"
-		frame_color = "#${lavender}"
+	if [[ "${auto_color}" != "true" ]]; then
+		cat >>${PATH_NOTIFY}/dunstrc <<-_EOF_
+			[urgency_low]
+			timeout = 2
+			background = "#${background}"
+			foreground = "#${foreground}"
+			frame_color = "#${color5}"
 
-		[urgency_normal]
-		timeout = 5
-		background = "#${base}"
-		foreground = "#${text}"
-		frame_color = "#${lavender}"
+			[urgency_normal]
+			timeout = 5
+			background = "#${background}"
+			foreground = "#${foreground}"
+			frame_color = "#${color5}"
 
-		[urgency_critical]
-		timeout = 0
-		background = "#${base}"
-		foreground = "#${text}"
-		frame_color = "#${lavender}"
-	_EOF_
+			[urgency_critical]
+			timeout = 0
+			background = "#${background}"
+			foreground = "#${foreground}"
+			frame_color = "#${color5}"
+		_EOF_
+	else
+		cat ${PATH_CLS}/dunst_color.toml >>${PATH_NOTIFY}/dunstrc
+	fi
 }
 
 apply_wm() {
@@ -242,71 +259,31 @@ apply_wm() {
 		-e "s@env=XCURSOR_SIZE,.*@env=XCURSOR_SIZE,${cursor_size}@g" \
 		-e "s@env=QT_WAYLAND_FORCE_DPI,.*@env=QT_WAYLAND_FORCE_DPI,${qt_wayland_dpi}@g"
 
-	cat >${HYPRDIR}/hypr_color.conf <<-_EOF_
+	if [[ "${auto_color}" != "true" ]]; then
+		cat >${HYPRDIR}/hypr_color.conf <<-_EOF_
+			\$background = ${background}
+			\$foreground = ${foreground}
 
-		\$rosewaterAlpha = ${rosewater}
-		\$flamingoAlpha  = ${flamingo}
-		\$pinkAlpha      = ${pink}
-		\$mauveAlpha     = ${mauve}
-		\$redAlpha       = ${red}
-		\$maroonAlpha    = ${maroon}
-		\$peachAlpha     = ${peach}
-		\$yellowAlpha    = ${yellow}
-		\$greenAlpha     = ${green}
-		\$tealAlpha      = ${teal}
-		\$skyAlpha       = ${sky}
-		\$sapphireAlpha  = ${sapphire}
-		\$blueAlpha      = ${blue}
-		\$lavenderAlpha  = ${lavender}
-
-		\$textAlpha      = ${text}
-		\$subtext1Alpha  = ${subtext1}
-		\$subtext0Alpha  = ${subtext0}
-
-		\$overlay2Alpha  = ${overlay2}
-		\$overlay1Alpha  = ${overlay1}
-		\$overlay0Alpha  = ${overlay0}
-
-		\$surface2Alpha  = ${surface2}
-		\$surface1Alpha  = ${surface1}
-		\$surface0Alpha  = ${surface0}
-
-		\$baseAlpha      = ${base}
-		\$mantleAlpha    = ${mantle}
-		\$crustAlpha     = ${crust}
-
-		\$rosewater = 0xff${rosewater}
-		\$flamingo  = 0xff${flamingo}
-		\$pink      = 0xff${pink}
-		\$mauve     = 0xff${mauve}
-		\$red       = 0xff${red}
-		\$maroon    = 0xff${maroon}
-		\$peach     = 0xff${peach}
-		\$yellow    = 0xff${yellow}
-		\$green     = 0xff${green}
-		\$teal      = 0xff${teal}
-		\$sky       = 0xff${sky}
-		\$sapphire  = 0xff${sapphire}
-		\$blue      = 0xff${blue}
-		\$lavender  = 0xff${lavender}
-
-		\$text      = 0xff${text}
-		\$subtext1  = 0xff${subtext1}
-		\$subtext0  = 0xff${subtext0}
-
-		\$overlay2  = 0xff${overlay2}
-		\$overlay1  = 0xff${overlay1}
-		\$overlay0  = 0xff${overlay0}
-
-		\$surface2  = 0xff${surface2}
-		\$surface1  = 0xff${surface1}
-		\$surface0  = 0xff${surface0}
-
-		\$base      = 0xff${base}
-		\$mantle    = 0xff${mantle}
-		\$crust     = 0xff${crust}
-	_EOF_
-
+			\$color0     = ${color0}
+			\$color1     = ${color1}
+			\$color2     = ${color2}
+			\$color3     = ${color3}
+			\$color4     = ${color4}
+			\$color5     = ${color5}
+			\$color6     = ${color6}
+			\$color7     = ${color7}
+			\$color8     = ${color8}
+			\$color9     = ${color9}
+			\$color10    = ${color10}
+			\$color11    = ${color11}
+			\$color12    = ${color12}
+			\$color13    = ${color13}
+			\$color14    = ${color14}
+			\$color15    = ${color15}
+		_EOF_
+	else
+		cp ${PATH_CLS}/hypr_color.conf ${HYPRDIR}/hypr_color.conf
+	fi
 	hyprctl reload
 }
 
@@ -335,6 +312,9 @@ confirm_run() {
 
 	selected="$(echo -e "${yes}\n${no}" | confirm_cmd)"
 	if [[ "${selected}" == "${yes}" ]]; then
+		if [[ "${auto_color}" == "true" ]]; then
+			wal_cmd
+		fi
 		notify_user "Theme Changed"
 		apply_wallpaper
 		apply_netmenu

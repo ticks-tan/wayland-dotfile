@@ -4,31 +4,31 @@
     font-family: 'Symbols Nerd Font', 'Ubuntu Nerd Font', 'Iosevka Nerd Font';
     font-size: 20px;
     font-weight: bold;
-    color: @text;
+    color: @foreground;
     border: none;
 }
 
 window#waybar {
-  background-color: @base;
-  border: 2px solid alpha(@crust, 0.3);
+  background-color: @background;
+  border: 2px solid alpha(@color0, 0.3);
 }
 
 tooltip {
-  background-color: @surface0;
+  background-color: @color8;
   border-radius: 12px;
-  border: 1px solid @base;
+  border: 1px solid @background;
   padding: 5px;
 }
 
 tooltip label {
-  color: @lavender;
+  color: @color5;
   font-size: 16px;
 }
 
 #custom-dot {
   font-family: 'Iosevka Nerd Font';
   font-size: 14px;
-  color: @overlay0;
+  color: alpha(@color7, 0.6);
   background: transparent;
   margin-left: 5px;
   margin-right: 5px;
@@ -37,7 +37,7 @@ tooltip label {
 #custom-dot-alt {
   font-family: 'Iosevka Nerd Font';
   font-size: 14px;
-  color: @subtext0;
+  color: alpha(@color7, 0.8);
   background: transparent;
   margin-left: 5px;
   margin-right: 5px;
@@ -54,7 +54,7 @@ tooltip label {
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 18px;
-  border: 2px solid @overlay0;
+  border: 2px solid alpha(@color7, 0.8);
 }
 
 button:hover {
@@ -67,29 +67,29 @@ button:hover {
 }
 #workspaces button:hover label {
   background: transparent;
-  color: @lavender;
+  color: @color5;
   border: none;
 }
 
 #workspaces button.empty label {
-  color: @overlay0;
+  color: alpha(@color7, 0.6);
 }
 
 #workspaces button.visible label{
-  color: @blue;
+  color: @color4;
 }
 
 #workspaces button.active label {
-  color: @green;
+  color: @color2;
 }
 
 #workspaces button label {
-  color: @overlay0;
+  color: alpha(@color7, 0.6);
 }
 
 #workspaces button.urgent label{
-  background-color: @red;
-  color: @text;
+  background-color: @color1;
+  color: @foreground;
 }
 
 
@@ -109,7 +109,7 @@ button:hover {
 }
 
 #tray {
-  background-color: @surface1;
+  background-color: alpha(@color7, 0.7);
   border-radius: 18px;
   padding-left: 10px;
   padding-right: 10px;
@@ -122,41 +122,41 @@ button:hover {
 
 #custom-sysmenu {
   font-family: 'Symbols Nerd Font';
-  color: @red;
+  color: @color1;
 }
 
 #battery {
-  color: @yellow;
+  color: @color3;
 }
 
 #pulseaudio {
-  color: @green;
+  color: @color2;
 }
 
 #backlight {
-  color: @teal;
+  color: @color6;
 }
 
 #network {
-  color: @blue;
+  color: @color4;
 }
 
 #mpd {
-  color: @lavender;
+  color: @color5;
   font-size: 16px;
 }
 
 #clock {
-  color: @flamingo;
+  color: @color3;
 }
 
 #cpu {
-  color: @pink;
+  color: @color9;
 }
 
 #custom-logo {
-  background-color: @base;
-  color: @lavender;
+  background-color: @background;
+  color: @color5;
   margin-left: 20px;
   margin-right: 10px;
 }
