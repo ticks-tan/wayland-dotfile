@@ -57,7 +57,7 @@ window {
     margin:                      0px;
     padding:                     0px;
     border:                      0px solid;
-    border-radius:               10px;
+    border-radius:               12px;
     border-color:                @border-colour;
     cursor:                      "default";
     /* Backgroud Colors */
@@ -108,7 +108,7 @@ textbox-prompt-colon {
     enabled:                     true;
     padding:                     5px 0px;
     expand:                      false;
-    str:                         "  ";
+    str:                         " ";
     background-color:            inherit;
     text-color:                  inherit;
 }

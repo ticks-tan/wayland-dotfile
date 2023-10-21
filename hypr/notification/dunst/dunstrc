@@ -12,7 +12,7 @@ height = 80
 ## 位置
 origin = top-right
 ## 距离屏幕边缘偏移
-offset = 10x48
+offset = 10x42
 ## 圆角
 corner_radius = 8
 scale = 0
@@ -26,7 +26,7 @@ progress_bar_max_width = 300
 indicate_hidden = yes
 transparency = 0
 separator_height = 80
-padding = 15
+padding = 10
 horizontal_padding = 15
 text_icon_padding = 0
 frame_width = 2
@@ -35,7 +35,7 @@ separator_color = frame
 sort = yes
 idle_threshold = 120
 ## 字体
-font = Sarasa UI SC 12
+font = Sarasa UI SC 14
 line_height = 80
 markup = full
 format = %s\n%b

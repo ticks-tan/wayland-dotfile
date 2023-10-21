@@ -24,7 +24,7 @@ window {
     margin:                      0px;
     padding:                     0px;
     border:                      0px solid;
-    border-radius:               10px;
+    border-radius:               12px;
     border-color:                @selected;
     cursor:                      "default";
     background-color:            @background;
@@ -56,16 +56,17 @@ inputbar {
 textbox-prompt-colon {
     enabled:                     true;
     expand:                      false;
-    str:                         "  ";
-    padding:                     10px 14px;
-    border-radius:               100%;
+    str:                         " ";
+    padding:                     10px 16px;
+    border-radius:               12px;
     background-color:            @active;
     text-color:                  @background;
+    text-align:                  center;
 }
 prompt {
     enabled:                     true;
     padding:                     10px;
-    border-radius:               20px;
+    border-radius:               12px;
     background-color:            @selected;
     text-color:                  @background;
 }

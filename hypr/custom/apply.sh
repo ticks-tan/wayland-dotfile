@@ -239,7 +239,8 @@ apply_wm() {
 		-e "s@env=GDK_DPI_SCALE,.*@env=GDK_DPI_SCALE,${gtk_dpi_scale}@g" \
 		-e "s@env=GTK_THEME,.*@env=GTK_THEME,${gtk_theme}@g" \
 		-e "s@env=XCURSOR_THEME,.*@env=XCURSOR_THEME,${gtk_cursor_theme}@g" \
-		-e "s@env=XCURSOR_SIZE,.*@env=XCURSOR_SIZE,${cursor_size}@g"
+		-e "s@env=XCURSOR_SIZE,.*@env=XCURSOR_SIZE,${cursor_size}@g" \
+		-e "s@env=QT_WAYLAND_FORCE_DPI,.*@env=QT_WAYLAND_FORCE_DPI,${qt_wayland_dpi}@g"
 
 	cat >${HYPRDIR}/hypr_color.conf <<-_EOF_
 

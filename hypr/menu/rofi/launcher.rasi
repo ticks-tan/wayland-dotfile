@@ -3,12 +3,12 @@
 configuration {
 	modi:                       "drun,run,filebrowser,window";
     show-icons:                 true;
-    display-drun:               "  ";
-    display-run:                "  ";
-    display-filebrowser:        "  ";
-    display-window:             "  ";
-	drun-display-format:        "{name}";
-	window-format:              "{c} · {t}";
+    display-drun:               " ";
+    display-run:                " ";
+    display-filebrowser:        " ";
+    display-window:             " ";
+    drun-display-format:        "{name}";
+    window-format:              "{c} · {t}";
 }
 
 /*****----- Global Properties -----*****/
@@ -57,7 +57,7 @@ window {
     margin:                      0px;
     padding:                     0px;
     border:                      0px solid;
-    border-radius:               10px;
+    border-radius:               12px;
     border-color:                @border-colour;
     cursor:                      "default";
     /* Backgroud Colors */
@@ -108,13 +108,13 @@ textbox-prompt-colon {
     enabled:                     true;
     padding:                     8px 0px;
     expand:                      false;
-    str:                         "  ";
+    str:                         " ";
     background-color:            inherit;
     text-color:                  inherit;
 }
 entry {
     enabled:                     true;
-    padding:                     8px 0px;
+    padding:                     8px;
     background-color:            inherit;
     text-color:                  inherit;
     cursor:                      text;
@@ -181,7 +181,7 @@ element {
     enabled:                     true;
     spacing:                     10px;
     margin:                      0px;
-    padding:                     6px;
+    padding:                     6px 6px 6px 12px;
     border:                      0px solid;
     border-radius:               8px;
     border-color:                @border-colour;
@@ -253,12 +253,13 @@ mode-switcher{
     text-color:                  @foreground-colour;
 }
 button {
-    padding:                     8px 12px;
+    padding:                     8px 16px;
     border:                      0px solid;
-    border-radius:               8px;
+    border-radius:               4px;
     border-color:                @border-colour;
     background-color:            @alternate-background;
     text-color:                  inherit;
+    text-align:                  center;
     cursor:                      pointer;
 }
 button selected {

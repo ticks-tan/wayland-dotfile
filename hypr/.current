@@ -57,8 +57,13 @@ menu_font="JetBrains Nerd Font 14"
 #########################
 notify_width="300"
 notify_height="80"
-notify_font="Sarasa UI SC 12"
+notify_font="Sarasa UI SC 14"
 notify_border="2"
+
+########################
+## QT
+########################
+qt_wayland_dpi=120
 
 ########################
 ## GTK
@@ -76,7 +81,7 @@ gtk_scale=1
 ## Gtk dpi 缩放(支持分数)
 gtk_dpi_scale=1.25
 ## 鼠标大小
-cursor_size=24
+cursor_size=28
 
 ########################
 ## Terminal
@@ -91,7 +96,7 @@ term_font_size="14"
 ########################
 
 ## 多久锁屏 (秒)
-hypr_lock_timeout=600
+hypr_lock_timeout=900
 
 ## 边框宽度
 hypr_border=2
@@ -112,7 +117,7 @@ hypr_inopacity=1.0
 ## 是否启用模糊
 hypr_blur_enable="true"
 ## 模糊大小
-hypr_blur_size=7
+hypr_blur_size=16
 ## 是否启用动画
 hypr_anim_enable="true"
 ## 是否在移动或者改变大小时启用动画
