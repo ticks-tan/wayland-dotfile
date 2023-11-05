@@ -71,6 +71,10 @@ button:hover {
   border: none;
 }
 
+#workspaces button label {
+  color: @color4;
+}
+
 #workspaces button.empty label {
   color: alpha(@color7, 0.6);
 }
@@ -81,10 +85,6 @@ button:hover {
 
 #workspaces button.active label {
   color: @color2;
-}
-
-#workspaces button label {
-  color: alpha(@color7, 0.6);
 }
 
 #workspaces button.urgent label{
