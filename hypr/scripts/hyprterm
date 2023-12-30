@@ -6,7 +6,7 @@
 ##
 
 DIR="${HOME}/.config/hypr"
-CONFIG="${DIR}/term/alacritty/alacritty.yml"
+CONFIG="${DIR}/term/alacritty/alacritty.toml"
 
 if [ "$1" == "--float" ]; then
 	alacritty --class "alacritty-float,alacritty-float" --config-file "${CONFIG}"

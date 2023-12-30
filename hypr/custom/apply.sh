@@ -104,79 +104,77 @@ apply_netmenu() {
 }
 
 apply_terminal() {
-	sed -i ${PATH_TERM}/fonts.yml \
-		-e "s@family: .*@family: \"${term_font}\"@g" \
-		-e "s@size: .*@size: ${term_font_size}@g"
+	sed -i ${PATH_TERM}/fonts.toml \
+		-e "s@family=.*@family=\"${term_font}\"@g" \
+		-e "s@size=.*@size=${term_font_size}@g"
 
 	# alacritty : colors
 	if [[ "${auto_color}" != "true" ]]; then
-		cat >${PATH_TERM}/colors.yml <<-_EOF_
-			colors:
-			  # Default colors
-			  primary:
-			    background: "#${background}"
-			    foreground: "#${foreground}"
+		cat >${PATH_TERM}/colors.toml <<-_EOF_
+# Default colors
+[colors.primary]
+background="#${background}"
+foreground="#${foreground}"
+dim_foreground="#${color15}"
+bright_foreground="#${foreground}"
 
-			    dim_foreground: "#${color15}"
-			    bright_foreground: "#${foreground}"
+# Cursor colors
+[colors.cursor]
+text="#${background}"
+cursor="#${foreground}"
 
-			  # Cursor colors
-			  cursor:
-			    text: "#${background}"
-			    cursor: "#${foreground}"
-			  vi_mode_cursor:
-			    text: "#${background}"
-			    cursor: "#${color2}"
+[colors.vi_mode_cursor]
+text="#${background}"
+cursor="#${color2}"
 
-			  # Search colors
-			  search:
-			    matches:
-			      foreground: "#${background}"
-			      background: "#${color8}"
-			    focused_match:
-			      foreground: "#${background}"
-			      background: "#${color2}"
-			    footer_bar:
-			      foreground: "#${background}"
-			      background: "#${color8}"
+# Search colors
+[colors.search]
+matches.foreground="#${background}"
+matches.background="#${color8}"
+focused_match.foreground="#${background}"
+focused_match.background="#${color2}"
 
-			  # Selection colors
-			  selection:
-			    text: "#${background}"
-			    background: "#${color3}"
+[colors.footer_bar]
+foreground="#${background}"
+background="#${color8}"
 
-			  # Normal colors
-			  normal:
-			    black: "#${color0}"
-			    red: "#${color1}"
-			    green: "#${color2}"
-			    yellow: "#${color3}"
-			    blue: "#${color4}"
-			    magenta: "#${color5}"
-			    cyan: "#${color6}"
-			    white: "#${color7}"
+# Selection colors
+[colors.selection]
+text="#${background}"
+background="#${color3}"
 
-			  # Bright colors
-			  bright:
-			    black: "#${color8}"
-			    red: "#${color9}"
-			    green: "#${color10}"
-			    yellow: "#${color11}"
-			    blue: "#${color12}"
-			    magenta: "#${color13}"
-			    cyan: "#${color14}"
-			    white: "#${color15}"
+# Normal colors
+[colors.normal]
+black="#${color0}"
+red="#${color1}"
+green="#${color2}"
+yellow="#${color3}"
+blue="#${color4}"
+magenta="#${color5}"
+cyan="#${color6}"
+white="#${color7}"
 
-			  # Dim colors
-			  dim:
-			    black: "#${color8}"
-			    red: "#${color9}"
-			    green: "#${color10}"
-			    yellow: "#${color11}"
-			    blue: "#${color12}"
-			    magenta: "#${color13}"
-			    cyan: "#${color14}"
-			    white: "#${color15}"
+# Bright colors
+[colors.bright]
+black="#${color8}"
+red="#${color9}"
+green="#${color10}"
+yellow="#${color11}"
+blue="#${color12}"
+magenta="#${color13}"
+cyan="#${color14}"
+white="#${color15}"
+
+# Dim colors
+[colors.dim]
+black="#${color8}"
+red="#${color9}"
+green="#${color10}"
+yellow="#${color11}"
+blue="#${color12}"
+magenta="#${color13}"
+cyan="#${color14}"
+white="#${color15}"
 		_EOF_
 	else
 		cp ${PATH_CLS}/alacritty_color.yml ${PATH_TERM}/colors.yml
