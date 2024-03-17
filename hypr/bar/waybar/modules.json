@@ -5,15 +5,17 @@
     "active-only": false,
     "format": "{icon}",
     "format-icons": {
-      "1": "",
-      "2": "",
-      "3": "",
-      "4": "",
-      "5": "",
-      "6": "",
-      "7": "",
-      "8": "",
-      "default": ""
+//      "1": "",
+//      "2": "",
+//      "3": "",
+//      "4": "",
+//      "5": "",
+//      "6": "",
+//      "7": "",
+//      "8": "",
+	  "urgent": "",
+	  "active": "",
+      "default": "󰧞"
     },
     "sort-by": "number",
     "persistent-workspaces": {
@@ -22,9 +24,7 @@
       "3": [],
       "4": [],
       "5": [],
-      "6": [],
-      "7": [],
-      "8": []
+      "6": []
     }
   },
   "hyprland/window": {
@@ -33,11 +33,8 @@
   },
   "backlight": {
     "device": "amdgpu_bl1",
-    "format": "<span font-family='Symbols Nerd Font'>{icon}</span> {percent}%",
-    "format-icons": [
-      "", "", "", "", "",
-      "", "", "", "", ""
-    ],
+    "format": "{icon} {percent}%",
+    "format-icons": ["", "", "", "", "", "", "", "", ""],
     "scroll-step": 5
   },
   "battery": {
@@ -45,52 +42,56 @@
     "adapter": "AC0",
     "full-at": 99,
     "format-time": "{H}:{M}",
-    "format": "<span font-family='Symbols Nerd Font'>{icon}</span> {capacity}%",
-    "format-icons": [
-      "", "", "", "", ""
-    ]
+    "format": "{icon} {capacity}%",
+    "format-icons": {
+      "charging": ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
+      "default": ["", "", "", "", ""]
+    },
+    "format-full": "Charged ",
+    "interval": 5,
+    "tooltip": false
   },
   "cpu": {
-    "format": "<span font-family='Symbols Nerd Font'>{icon}</span> {usage}%",
-    "format-icons": [ "" ],
+    "format": "{icon} {usage}%",
+    "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
     "interval": 10
   },
   "clock": {
     "interval": 60,
-    "format": "<span font-family='Symbols Nerd Font'> </span>{:%H:%M}",
+    "format": " {:%H:%M}",
     "tooltip-format": "{:%Y-%m-%d %H:%M}"
   },
   "mpd": {
     "max-length": 25,
-    "format": "<span font-family='Symbols Nerd Font'> </span> {title} - {artist}",
-    "format-stopped": "<span font-family='Symbols Nerd Font'> </span> Stopped",
-    "format-paused": "<span font-family='Symbols Nerd Font'> </span> Paused",
+    "format": " {title} - {artist}",
+    "format-stopped": " Stopped",
+    "format-paused": " Paused",
     "on-click": "mpc toggle",
     "on-scroll-up": "mpc prev",
     "on-scroll-down": "mpc next",
-    "on-click-right": "~/.config/hypr/scripts/menu_music"
+    "on-click-right": "~/.config/hypr/scripts/menu_music &"
   },
   "network": {
-    "interval": 30,
-    "format-wifi": "<span font-family='Symbols Nerd Font'>直</span> {essid}",
-    "format-ethernet": "<span font-family='Symbols Nerd Font'> </span> {essid}",
-    "format-disconnected": "<span font-family='Symbols Nerd Font'>睊</span> Disconnect",
-    "tooltip-format": "{bandwidthUpBytes} | {bandwidthDownBytes}",
-    "on-click": "networkmanager_dmenu"
+    "interval": 5,
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "format-wifi": "{icon} {signalStrength}%",
+    "format-ethernet": "",
+    "format-disconnected": "󰖪 None",
+    "tooltip-format": "{essid} : {bandwidthUpBytes} | {bandwidthDownBytes}",
+    "on-click": "~/.config/hypr/scripts/menu_wifi &"
   },
   "pulseaudio": {
     "scroll-step": 5,
-    "format": "<span font-family='Symbols Nerd Font'>{icon}</span> {volume}%",
+    "format": "{icon} {volume}%",
+    "tooltip-format": "Volume : {volume}%",
     "format-icons": {
       "headphone": "",
-      "hands-free": "",
-      "headset": "",
       "phone": "",
       "portable": "",
       "car": "",
-      "default": ["奄", "奔", "墳", "墳"]
+      "default": ["󰖀", "󰕾", ""]
     },
-    "format-muted": "婢"
+    "format-muted": "󰝟"
   },
   "tray": {
     "icon-size": 20,

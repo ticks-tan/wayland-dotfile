@@ -5,16 +5,16 @@
 
 # Normal font face
 [font.normal]
-family="Hack Nerd Font"
+family="Maple Mono SC NF"
 # Bold font face
 [font.bold]
-family="Hack Nerd Font"
+family="Maple Mono SC NF"
 # Italic font face
 [font.italic]
-family="Hack Nerd Font"
+family="Maple Mono SC NF"
 # Bold italic font face
 [font.bold_italic]
-family="Hack Nerd Font"
+family="Maple Mono SC NF"
 [font]
 # Point size
 size=14

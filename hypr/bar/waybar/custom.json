@@ -8,13 +8,13 @@
     "tooltip": false
   },
   "custom/sysmenu": {
-    "format": "襤",
+    "format": "󰤆",
     "tooltip": false,
-    "on-click": "~/.config/hypr/scripts/menu_powermenu"
+    "on-click": "~/.config/hypr/scripts/menu_powermenu &"
   },
   "custom/logo": {
-    "format": "A",
+    "format": "󰣇",
     "tooltip": false,
-    "on-click": "~/.config/hypr/scripts/menu_launcher"
+    "on-click": "~/.config/hypr/scripts/menu_launcher &"
   }
 }

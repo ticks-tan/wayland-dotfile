@@ -1,0 +1,5 @@
+#!/bin/env bash
+
+HyprDir=${HOME}/.config/hypr
+
+cliphist list | rofi -dmenu -theme $HyprDir/menu/rofi/clipbord.rasi | cliphist decode | wl-copy

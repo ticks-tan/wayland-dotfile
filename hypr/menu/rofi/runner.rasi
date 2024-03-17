@@ -15,32 +15,6 @@ configuration {
 @import                          "shared/colors.rasi"
 @import                          "shared/fonts.rasi"
 
-* {
-    border-colour:               var(selected);
-    handle-colour:               var(selected);
-    background-colour:           var(background);
-    foreground-colour:           var(foreground);
-    alternate-background:        var(background-alt);
-    normal-background:           var(background);
-    normal-foreground:           var(foreground);
-    urgent-background:           var(urgent);
-    urgent-foreground:           var(background);
-    active-background:           var(active);
-    active-foreground:           var(background);
-    selected-normal-background:  var(selected);
-    selected-normal-foreground:  var(background);
-    selected-urgent-background:  var(active);
-    selected-urgent-foreground:  var(background);
-    selected-active-background:  var(urgent);
-    selected-active-foreground:  var(background);
-    alternate-normal-background: var(background);
-    alternate-normal-foreground: var(foreground);
-    alternate-urgent-background: var(urgent);
-    alternate-urgent-foreground: var(background);
-    alternate-active-background: var(active);
-    alternate-active-foreground: var(background);
-}
-
 /*****----- Main Window -----*****/
 window {
     /* properties for window widget */
@@ -58,18 +32,9 @@ window {
     padding:                     0px;
     border:                      0px solid;
     border-radius:               12px;
-    border-color:                @border-colour;
+    border-color:                @primaryContainer;
     cursor:                      "default";
-    /* Backgroud Colors */
-    background-color:            @background-colour;
-    /* Backgroud Image */
-    //background-image:          url("/path/to/image.png", none);
-    /* Simple Linear Gradient */
-    //background-image:          linear-gradient(red, orange, pink, purple);
-    /* Directional Linear Gradient */
-    //background-image:          linear-gradient(to bottom, pink, yellow, magenta);
-    /* Angle Linear Gradient */
-    //background-image:          linear-gradient(45, cyan, purple, indigo);
+    background-color:            @background;
 }
 
 /*****----- Main Box -----*****/
@@ -80,7 +45,7 @@ mainbox {
     padding:                     30px;
     border:                      0px solid;
     border-radius:               0px 0px 0px 0px;
-    border-color:                @border-colour;
+    border-color:                @primaryContainer;
     background-color:            transparent;
     children:                    [ "inputbar", "message", "listview" ];
 }
@@ -93,9 +58,9 @@ inputbar {
     padding:                     0px;
     border:                      0px solid;
     border-radius:               0px;
-    border-color:                @border-colour;
+    border-color:                @primaryContainer;
     background-color:            transparent;
-    text-color:                  @foreground-colour;
+    text-color:                  @onBackground;
     children:                    [ "textbox-prompt-colon", "entry" ];
 }
 
@@ -164,16 +129,16 @@ listview {
     padding:                     0px;
     border:                      0px solid;
     border-radius:               0px;
-    border-color:                @border-colour;
+    border-color:                @primaryContainer;
     background-color:            transparent;
-    text-color:                  @foreground-colour;
+    text-color:                  @onBackground;
     cursor:                      "default";
 }
 scrollbar {
     handle-width:                5px ;
-    handle-color:                @handle-colour;
+    handle-color:                @primaryContainer;
     border-radius:               10px;
-    background-color:            @alternate-background;
+    background-color:            @surface;
 }
 
 /*****----- Elements -----*****/
@@ -184,46 +149,46 @@ element {
     padding:                     6px;
     border:                      0px solid;
     border-radius:               8px;
-    border-color:                @border-colour;
+    border-color:                @primaryContainer;
     background-color:            transparent;
-    text-color:                  @foreground-colour;
+    text-color:                  @onBackground;
     cursor:                      pointer;
 }
 element normal.normal {
-    background-color:            var(normal-background);
-    text-color:                  var(normal-foreground);
+    background-color:            @background;
+    text-color:                  @onBackground;
 }
 element normal.urgent {
-    background-color:            var(urgent-background);
-    text-color:                  var(urgent-foreground);
+    background-color:            @error;
+    text-color:                  @onError;
 }
 element normal.active {
-    background-color:            var(active-background);
-    text-color:                  var(active-foreground);
+    background-color:            @primary;
+    text-color:                  @onPrimary;
 }
 element selected.normal {
-    background-color:            var(selected-normal-background);
-    text-color:                  var(selected-normal-foreground);
+    background-color:            @primaryContainer;
+    text-color:                  @onPrimaryContainer;
 }
 element selected.urgent {
-    background-color:            var(selected-urgent-background);
-    text-color:                  var(selected-urgent-foreground);
+    background-color:            @error;
+    text-color:                  @onError;
 }
 element selected.active {
-    background-color:            var(selected-active-background);
-    text-color:                  var(selected-active-foreground);
+    background-color:            @primary;
+    text-color:                  @onPrimary;
 }
 element alternate.normal {
-    background-color:            var(alternate-normal-background);
-    text-color:                  var(alternate-normal-foreground);
+    background-color:            @surface;
+    text-color:                  @onSurface;
 }
 element alternate.urgent {
-    background-color:            var(alternate-urgent-background);
-    text-color:                  var(alternate-urgent-foreground);
+    background-color:            @error;
+    text-color:                  @onError;
 }
 element alternate.active {
-    background-color:            var(alternate-active-background);
-    text-color:                  var(alternate-active-foreground);
+    background-color:            @primary;
+    text-color:                  @onPrimary;
 }
 element-icon {
     background-color:            transparent;
@@ -248,22 +213,22 @@ mode-switcher{
     padding:                     0px;
     border:                      0px solid;
     border-radius:               0px;
-    border-color:                @border-colour;
+    border-color:                @primaryContainer;
     background-color:            transparent;
-    text-color:                  @foreground-colour;
+    text-color:                  @onBackground;
 }
 button {
     padding:                     5px 10px;
     border:                      0px solid;
     border-radius:               8px;
-    border-color:                @border-colour;
-    background-color:            @alternate-background;
+    border-color:                @primaryContainer;
+    background-color:            @surface;
     text-color:                  inherit;
     cursor:                      pointer;
 }
 button selected {
-    background-color:            var(selected-normal-background);
-    text-color:                  var(selected-normal-foreground);
+    background-color:            @primaryContainer;
+    text-color:                  @onPrimaryContainer;
 }
 
 /*****----- Message -----*****/
@@ -273,19 +238,19 @@ message {
     padding:                     8px 10px;
     border:                      0px solid;
     border-radius:               8px;
-    border-color:                @border-colour;
-    background-color:            @alternate-background;
-    text-color:                  @foreground-colour;
+    border-color:                @primaryContainer;
+    background-color:            @surface;
+    text-color:                  @onBackground;
 }
 textbox {
     border:                      0px solid;
-    border-color:                @border-colour;
+    border-color:                @primaryContainer;
     background-color:            transparent;
-    text-color:                  @foreground-colour;
+    text-color:                  @onBackground;
     vertical-align:              0.5;
     horizontal-align:            0.0;
     highlight:                   none;
-    placeholder-color:           @foreground-colour;
+    placeholder-color:           @onBackground;
     blink:                       true;
     markup:                      true;
 }
@@ -293,7 +258,7 @@ error-message {
     padding:                     15px;
     border:                      0px solid;
     border-radius:               10px;
-    border-color:                @border-colour;
-    background-color:            @background-colour;
-    text-color:                  @foreground-colour;
+    border-color:                @primaryContainer;
+    background-color:            @background;
+    text-color:                  @onBackground;
 }

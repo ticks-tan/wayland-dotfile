@@ -35,7 +35,7 @@ separator_color = frame
 sort = yes
 idle_threshold = 120
 ## 字体
-font = Sarasa UI SC 14
+font = Maple Mono SC NF 14
 line_height = 80
 markup = full
 format = %s\n%b
@@ -65,18 +65,18 @@ class = Dunst
 
 [urgency_low]
 timeout = 2
-background  = "#121015"
-foreground  = "#cfd1da"
-frame_color = "#738BAC"
+background = "#f8faf0"
+foreground = "#191d17"
+frame_color = "#ecefe5"
 
 [urgency_normal]
 timeout = 5
-background  = "#121015"
-foreground  = "#cfd1da"
-frame_color = "#738BAC"
+background = "#f8faf0"
+foreground = "#191d17"
+frame_color = "#ecefe5"
 
 [urgency_critical]
 timeout = 0
-background  = "#121015"
-foreground  = "#cfd1da"
-frame_color = "#738BAC"
+background = "#ba1a1a"
+foreground = "#ffffff"
+frame_color = "#ecefe5"

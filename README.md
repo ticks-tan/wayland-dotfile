@@ -17,7 +17,7 @@
 
 - **状态栏**：`waybar`
 
-- **启动器**：`rofi-wayland` 或 `wofi`
+- **启动器**：`rofi-wayland`
 
 - **通知**：`dunst`
 
@@ -35,25 +35,25 @@
 
 - **录屏**：`obs-studio` `wireplumber`
 
-- **锁屏**：`swaylock` `swayidle`
+- **锁屏**：`hyprlocklock` `hypridle`
 
 - **终端**：`alacritty`
 
 - **音乐**：`mpd` `ncmpcpp` `mpc`
 
-- **网络**：`networkmanager` `wpa_supplicant`
+- **网络**：`networkmanager` `iwd`
 
 - **文本编辑器**：`neovim` `geany`
 
 - **主题**：`qt5ct` `kvantum` `gsettings-desktop-schemas`
 
-- **字体**：`Symbols Nerd Font` `JetBrains Nerd Font` `Sarasa UI SC` `Iosevka Nerd Font` `Hack Nerd Font`
+- **字体**：`Maple Mono SC NF` `Iosevka Nerd Font`
 
-- **动态取色**： `python-pywal`
+- **动态取色(included)**： `md-color`
 
 ### 安装说明
 
-大部分软件都可以在Archlinux官方仓库下载到，字体请到下方链接下载或者仓库 fonts 目录下下载：
+大部分软件都可以在Archlinux官方仓库下载到，字体到下方链接下载或者仓库 fonts 目录下下载：
 
 Sarasa: https://github.com/be5invis/Sarasa-Gothic
 
@@ -63,7 +63,7 @@ LXGW: https://github.com/lxgw/LxgwBright
 
 rofi 请使用 `rofi-lbonn-wayland` 
 
-正式使用前请保证安装好对应字体，字体中包含了很多图标显示。仓库`other`下其他目录为非必需配置文件，可根据自身情况选择性使用，直接复制对应目录到 `~/.config/` 下即可。
+正式使用前请保证安装好对应字体，字体中包含了很多图标显示。
 
 ### 安装步骤：
 
@@ -84,15 +84,13 @@ mv ~/.config/hypr ~/.config/hypr-back
 
 ```bash
 cp -r hypr ~/.config/
-
-## 拷贝其他配置
-cp -r other/xxx ~/.config/xxx
-
-## 如果需要壁纸动态取色，必须拷贝 other/wal 到 ~/.config/ !!!
-cp -r other/wal ~/.config/
 ```
 
 4. 启动 hyprland 查看效果
+
+```bash
+hyprland
+```
 
 ### 主题
 
@@ -106,7 +104,7 @@ cp -r other/wal ~/.config/
 
 ### 键盘绑定
 
-下面是一些主要的绑定，具体请查看 `hyprland.conf` 
+下面是一些主要的绑定，具体请查看 `hyprland/bind.conf` 
 | 键 | 绑定操作 |
 | ---| ---|
 | Mod + Shift + Q | 退出Hyprland |
@@ -124,9 +122,9 @@ cp -r other/wal ~/.config/
 | Mod + Shift + X | PowerMenu菜单 |
 | Mod + Shift + N | 网络小部件 |
 | Mod + Shift + M | 音乐小部件 |
-| Mod + T | 应用主题变更 |
+| Mod + Shift + T | 应用主题变更 |
 | Mod + C | 关闭应用 |
-| Mod + Shift | Space | 切换平铺与浮动 |
+| Mod + Shift + Space | 切换平铺与浮动 |
 | Mod + 鼠标| 移动或调整窗口 |
 
 ###  其他

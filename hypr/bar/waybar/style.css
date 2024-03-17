@@ -1,95 +1,87 @@
 @import "color.css";
 
 * {
-    font-family: 'Symbols Nerd Font', 'Ubuntu Nerd Font', 'Iosevka Nerd Font';
-    font-size: 20px;
-    font-weight: bold;
-    color: @foreground;
+    font-family: 'Iosevka Nerd Font', 'Maple Mono SC NF';
+    font-size: 16px;
+    font-style: normal;
+    color: @onBackground;
     border: none;
+	border-radius: 0px;
+	min-height: 0px;
 }
 
 window#waybar {
   background-color: @background;
-  border: 2px solid alpha(@color0, 0.3);
+  color: @onBackground;
+  box-shadow: 2px 2px @shadow;
 }
 
 tooltip {
-  background-color: @color8;
-  border-radius: 12px;
-  border: 1px solid @background;
-  padding: 5px;
+  background-color: @secondaryContainer;
+  color: @onSecondaryContainer;
+  border-radius: 8px;
+  border: 1px solid @outline;
+  padding: 10px;
 }
 
 tooltip label {
-  color: @color5;
+  color: @onSecondaryContainer;
   font-size: 16px;
 }
 
 #custom-dot {
-  font-family: 'Iosevka Nerd Font';
   font-size: 14px;
-  color: alpha(@color7, 0.6);
-  background: transparent;
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-top: 5px;
+  color: alpha(@tertiary, 0.8);
+  padding: 0px 5px;
 }
+
 #custom-dot-alt {
-  font-family: 'Iosevka Nerd Font';
   font-size: 14px;
-  color: alpha(@color7, 0.8);
-  background: transparent;
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-top: 5px;
+  color: alpha(@tertiary, 0.8);
+  padding: 0px 5px;
 }
 
 #workspaces {
-  font-family: 'Symbols Nerd Font';
-  font-size: 16px;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  margin-left: 20px;
-  margin-right: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 18px;
-  border: 2px solid alpha(@color7, 0.8);
+  margin: 5px 10px;
+  padding: 0px 10px;
+  border-radius: 99px;
+  font-style: normal;
+  font-weight: normal;
+  background-color: @surfaceContainer;
+  color: @onSurfaceContainer;
 }
 
-button:hover {
-  box-shadow: none;
+#workspaces button {
+	margin: 5px 0px;
+	border-radius: 99px;
+}
+
+#workspaces button {
+  padding: 0px 10px 0px 10px;
+  border-radius: 99px;
+  background-color: @surfaceDim;
+  color: @onSurfaceDim;
 }
 
 #workspaces button:hover {
-  background: transparent;
-  border: none;
-}
-#workspaces button:hover label {
-  background: transparent;
-  color: @color5;
-  border: none;
+	background-color: @primary;
+	color: @onPrimary;
 }
 
-#workspaces button label {
-  color: @color4;
+#workspaces button.empty {
+  background-color: transparent;
+  color: @onSufaceContainer;
 }
 
-#workspaces button.empty label {
-  color: alpha(@color7, 0.6);
+#workspaces button.active {
+	padding: 0px 10px 0px 5px;
+	background-color: @primary;
+	color: @onPrimary;
 }
 
-#workspaces button.visible label{
-  color: @color4;
-}
-
-#workspaces button.active label {
-  color: @color2;
-}
-
-#workspaces button.urgent label{
-  background-color: @color1;
-  color: @foreground;
+#workspaces button.urgent {
+	background-color: @error;
+	color: @onError;
 }
 
 
@@ -102,61 +94,21 @@ button:hover {
 #battery, 
 #custom-sysmenu, 
 #tray{
-  /*margin-top: 5px;*/
-  /*margin-bottom: 5px;*/
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 5px 10px;
+  background-color: @surfaceContainer;
+  border-radius: 99px;
 }
 
 #tray {
-  background-color: alpha(@color7, 0.7);
-  border-radius: 18px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-right: 20px;
-  margin-left: 20px;
-  margin-top: 2px;
-  margin-bottom: 2px;
+  padding: 10px 20px;
   min-width: 20px;
-}
-
-#custom-sysmenu {
-  font-family: 'Symbols Nerd Font';
-  color: @color1;
-}
-
-#battery {
-  color: @color3;
-}
-
-#pulseaudio {
-  color: @color2;
-}
-
-#backlight {
-  color: @color6;
-}
-
-#network {
-  color: @color4;
-}
-
-#mpd {
-  color: @color5;
-  font-size: 16px;
-}
-
-#clock {
-  color: @color3;
-}
-
-#cpu {
-  color: @color9;
 }
 
 #custom-logo {
   background-color: @background;
-  color: @color5;
+  color: @onBackground;
   margin-left: 20px;
-  margin-right: 10px;
+  margin-right: 20px;
 }

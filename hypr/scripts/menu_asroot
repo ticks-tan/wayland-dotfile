@@ -14,10 +14,10 @@ prompt="Root"
 msg="Run Applications As Root"
 term="alacritty --class alacritty-float,alacritty-float --config-file=${rootdir}/term/alacritty/alacritty.yml"
 
-opt1=" Alacritty"
-opt2=" Thunar"
-opt3=" Geany"
-opt4=" NeoVim"
+opt1=" Alacritty"
+opt2=" Thunar"
+opt3="󰈙 Geany"
+opt4=" NeoVim"
 
 root_cmd() {
 	SUDO_ASKPASS=${dir}/scripts/menu_askpass sudo -A $1

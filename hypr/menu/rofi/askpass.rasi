@@ -14,7 +14,7 @@ window {
     padding:                     20px;
     border:                      0px solid;
     border-radius:               12px;
-    border-color:                @selected;
+    border-color:                @primaryContainer;
     background-color:            @background;
     cursor:                      "default";
     children:                    [ "inputbar", "listview" ];
@@ -28,9 +28,9 @@ inputbar {
     padding:                     0px;
     border:                      0px solid;
     border-radius:               0px;
-    border-color:                @selected;
+    border-color:                @primaryContainer;
     background-color:            transparent;
-    text-color:                  @foreground;
+    text-color:                  @onBackground;
     children:                    [ "textbox-prompt-colon", "prompt", "entry" ];
 }
 
@@ -45,21 +45,21 @@ textbox-prompt-colon {
     str:                         " ";
     padding:                     10px 16px;
     border-radius:               12px;
-    background-color:            @active;
-    text-color:                  @background;
+    background-color:            @primaryContainer;
+    text-color:                  @onPrimaryContainer;
 }
 prompt {
     enabled:                     true;
     padding:                     10px;
     border-radius:               12px;
-    background-color:            @selected;
-    text-color:                  @background;
+    background-color:            @primaryContainer;
+    text-color:                  @onPrimaryContainer;
 }
 entry {
     enabled:                     true;
     padding:                     10px 15px;
     border-radius:               12px;
-    background-color:            @background-alt;
+    background-color:            @surface;
     text-color:                  inherit;
     cursor:                      text;
     placeholder:                 "Input Password ...";

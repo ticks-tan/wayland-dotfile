@@ -13,14 +13,12 @@
   "modules-left": [
     "custom/logo",
     "custom/dot-alt",
-    "hyprland/workspaces",
+    "clock",
     "custom/dot",
     "cpu"
   ],
   "modules-center": [
-    "clock",
-    "custom/dot-alt",
-    "mpd"
+    "hyprland/workspaces"
   ],
   "modules-right": [
     "network",

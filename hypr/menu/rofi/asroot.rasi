@@ -21,7 +21,7 @@ window {
     padding:                     0px;
     border:                      0px solid;
     border-radius:               12px;
-    border-color:                @selected;
+    border-color:                @primaryContainer;
     cursor:                      "default";
     background-color:            @background;
 }
@@ -43,9 +43,9 @@ inputbar {
     padding:                     0px;
     border:                      0px;
     border-radius:               0px;
-    border-color:                @selected;
+    border-color:                @primaryContainer;
     background-color:            transparent;
-    text-color:                  @foreground;
+    text-color:                  @onBackground;
     children:                    [ "textbox-prompt-colon", "prompt"];
 }
 
@@ -55,15 +55,15 @@ textbox-prompt-colon {
     str:                         " ";
     padding:                     10px 16px;
     border-radius:               12px;
-    background-color:            @active;
-    text-color:                  @background;
+    background-color:            @primary;
+    text-color:                  @onPrimary;
 }
 prompt {
     enabled:                     true;
     padding:                     10px;
     border-radius:               12px;
-    background-color:            @selected;
-    text-color:                  @background;
+    background-color:            @primaryContainer;
+    text-color:                  @onPrimaryContainer;
 }
 
 /*****----- Message -----*****/
@@ -73,9 +73,9 @@ message {
     padding:                     10px;
     border:                      0px solid;
     border-radius:               12px;
-    border-color:                @selected;
-    background-color:            @background-alt;
-    text-color:                  @foreground;
+    border-color:                @primaryContainer;
+    background-color:            @surface;
+    text-color:                  @onSurface;
 }
 textbox {
     background-color:            inherit;
@@ -104,9 +104,9 @@ element {
     padding:                     16px 10px;
     border:                      0px solid;
     border-radius:               12px;
-    border-color:                @selected;
+    border-color:                @primaryContainer;
     background-color:            transparent;
-    text-color:                  @foreground;
+    text-color:                  @onBackground;
     cursor:                      pointer;
 }
 element-text {
@@ -120,22 +120,22 @@ element-text {
 
 element normal.normal,
 element alternate.normal {
-    background-color:            var(background-alt);
-    text-color:                  var(foreground);
+    background-color:            @surface;
+    text-color:                  @onSurface;
 }
 element normal.urgent,
 element alternate.urgent,
 element selected.active {
-    background-color:            var(urgent);
-    text-color:                  var(background);
+    background-color:            @error;
+    text-color:                  @onError;
 }
 element normal.active,
 element alternate.active,
 element selected.urgent {
-    background-color:            var(active);
-    text-color:                  var(background);
+    background-color:            @primary;
+    text-color:                  @onPrimary;
 }
 element selected.normal {
-    background-color:            var(selected);
-    text-color:                  var(background);
+    background-color:            @primaryContainer;
+    text-color:                  @onPrimaryContainer;
 }

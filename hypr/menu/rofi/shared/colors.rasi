@@ -1,8 +1,12 @@
 * {
-    background:     #121015;
-    background-alt: #909298;
-    foreground:     #cfd1da;
-    selected:       #738BAC;
-    active:         #677491;
-    urgent:         #E4887B;
+background:         #f8faf0;
+surface:            #f8faf0;
+onSurface:          #191d17;
+onBackground:       #191d17;
+primaryContainer:   #c3efad;
+onPrimaryContainer: #042100;
+primary:            #426834;
+onPrimary:          #ffffff;
+error:              #ba1a1a;
+onError:            #ffffff;
 }

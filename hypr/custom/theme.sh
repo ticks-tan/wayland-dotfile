@@ -10,23 +10,23 @@
 ## Wallpaper
 ## 需要 锁屏使用壁纸则需要设置为绝对路径！
 #########################
-wallpaper_path="~/.local/share/wallpapers/wallhaven-7p3we9.png"
+wallpaper_path="~/.local/share/wallpaper/bg1.png"
 ## 是否从壁纸获取颜色
 auto_color="true"
 ## 颜色主题模式(light / dark)
-color_scheme="dark"
+color_scheme="light"
 
 #########################
 ## Menu
 #########################
-menu_font="JetBrains Nerd Font 14"
+menu_font="Maple Mono SC NF 14"
 
 #########################
 ## Notification
 #########################
 notify_width="300"
 notify_height="80"
-notify_font="Sarasa UI SC 14"
+notify_font="Maple Mono SC NF 14"
 notify_border="2"
 
 ########################
@@ -48,15 +48,15 @@ gtk_cursor_theme="Catppuccin-Macchiato-Light"
 ## Gtk 缩放(整数)
 gtk_scale=1
 ## Gtk dpi 缩放(支持分数)
-gtk_dpi_scale=1.25
+gtk_dpi_scale=1.5
 ## 鼠标大小
-cursor_size=28
+cursor_size=24
 
 ########################
 ## Terminal
 ########################
 ## 终端字体
-term_font="Hack Nerd Font"
+term_font="Maple Mono SC NF"
 ## 终端字体大小
 term_font_size="14"
 

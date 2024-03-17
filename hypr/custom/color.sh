@@ -1,28 +1,30 @@
-#!/usr/bin/env
+background="f8faf0"
+onBackground="191d17"
 
-#########################
-## Color
-#########################
-## 颜色配置，参考
-##  https://github.com/catppuccin/catppuccin
-##  https://github.com/dylanaraps/pywal
+primary="426834"
+secondary="54624d"
+tertiary="386667"
+error="ba1a1a"
+primaryContainer="c3efad"
+secondaryContainer="d5e5c9"
+tertiaryContainer="bcebed"
+errorContainer="ffdad6"
+surfaceDim="d8dbd1"
+surface="f8faf0"
+surfaceBright="f8faf0"
+surfaceContainer="ecefe5"
+outline="73796e"
+shadow="000000"
+inversePrimary="a7d293"
+inverseSurface="2e312b"
 
-background="24273a"
-foreground="cad3f5"
-
-color0="181926" # black
-color1="ed8796" # red
-color2="a6da95" # green
-color3="eed49f" # yellow
-color4="8aadf4" # blue
-color5="b7bdf8" # lavender
-color6="8bd5ca" # cyan
-color7="cad3f5" # white
-color8="181926"
-color9="ed8796"
-color10="a6da95"
-color11="eed49f"
-color12="8aadf4"
-color13="b7bdf8"
-color14="8bd5ca"
-color15="cad3f5"
+onPrimary="ffffff"
+onSecondary="ffffff"
+onTertiary="ffffff"
+onError="ffffff"
+onPrimaryContainer="042100"
+onSecondaryContainer="131f0e"
+onTertiaryContainer="002021"
+onErrorContainer="410002"
+onSurface="191d17"
+scrim="000000"

@@ -1,65 +1,64 @@
 # Default colors
 [colors.primary]
-background="#121015"
-foreground="#cfd1da"
-dim_foreground="#cfd1da"
-bright_foreground="#cfd1da"
+background="#f8faf0"
+foreground="#191d17"
+dim_foreground="#191d17"
+bright_foreground="#191d17"
 
 # Cursor colors
 [colors.cursor]
-text="#121015"
-cursor="#cfd1da"
+text="#f8faf0"
+cursor="#191d17"
 
 [colors.vi_mode_cursor]
-text="#121015"
-cursor="#316F85"
+text="#f8faf0"
+cursor="#191d17"
 
 # Search colors
 [colors.search]
-matches.foreground="#121015"
-matches.background="#909298"
-focused_match.foreground="#121015"
-focused_match.background="#316F85"
+matches.foreground="#191d17"
+matches.background="#ecefe5"
+focused_match.foreground="#ecefe5"
+focused_match.background="#191d17"
 
 [colors.footer_bar]
-foreground="#121015"
-background="#909298"
+foreground="#191d17"
+background="#f8faf0"
 
 # Selection colors
 [colors.selection]
-text="#121015"
-background="#677491"
+text="#f8faf0"
+background="#191d17"
 
 # Normal colors
 [colors.normal]
-black="#121015"
-red="#E4887B"
-green="#316F85"
-yellow="#677491"
-blue="#A17886"
-magenta="#738BAC"
-cyan="#E09997"
-white="#cfd1da"
+black="#11111b"
+red="#d20f39"
+green="#40a02b"
+yellow="#df8e1d"
+blue="#1e66f5"
+magenta="#8839ef"
+cyan="#9ca0b0"
+white="#eff1f5"
 
 # Bright colors
 [colors.bright]
-black="#909298"
-red="#E4887B"
-green="#316F85"
-yellow="#677491"
-blue="#A17886"
-magenta="#738BAC"
-cyan="#E09997"
-white="#cfd1da"
+black="#11111b"
+red="#d20f39"
+green="#40a02b"
+yellow="#df8e1d"
+blue="#1e66f5"
+magenta="#8839ef"
+cyan="#9ca0b0"
+white="#eff1f5"
 
 # Dim colors
 [colors.dim]
-black="#909298"
-red="#E4887B"
-green="#316F85"
-yellow="#677491"
-blue="#A17886"
-magenta="#738BAC"
-cyan="#E09997"
-white="#cfd1da"
-
+black="#11111b"
+red="#d20f39"
+green="#40a02b"
+yellow="#df8e1d"
+blue="#1e66f5"
+magenta="#8839ef"
+cyan="#9ca0b0"
+white="#eff1f5"

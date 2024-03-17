@@ -1,0 +1,204 @@
+
+/*****----- Configuration -----*****/
+configuration {
+    show-icons:                 false;
+}
+
+/*****----- Global Properties -----*****/
+@import                          "shared/colors.rasi"
+@import                          "shared/fonts.rasi"
+
+/*****----- Main Window -----*****/
+window {
+    /* properties for window widget */
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    height:                      490px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+
+    /* properties for all widgets */
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               12px;
+    border-color:                @primaryContainer;
+    cursor:                      "default";
+    background-color:            @background;
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     10px;
+    margin:                      0px;
+    padding:                     20px;
+    border:                      0px solid;
+    border-radius:               0px 0px 0px 0px;
+    border-color:                @primaryContainer;
+    background-color:            transparent;
+    children:                    [ "inputbar", "message", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     10px;
+    margin:                      0px;
+    padding:                     0px 10px 0px 5px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @primaryContainer;
+    background-color:            transparent;
+    text-color:                  @onBackground;
+    children:                    [ "prompt", "entry" ];
+}
+
+prompt {
+    enabled:                     true;
+    padding:                     8px;
+    border-radius:               12px;
+    text-align:                  center;
+    background-color:            @primaryContainer;
+    text-color:                  @onPrimaryContainer;
+}
+
+entry {
+    enabled:                     true;
+    padding:                     8px 12px;
+    border-radius:               12px;
+    background-color:            @surface;
+    text-color:                  inherit;
+    cursor:                      text;
+    placeholder:                 "search wifi by name";
+    placeholder-color:           inherit;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     1;
+    lines:                       6;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   true;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    
+    spacing:                     5px;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @primaryContainer;
+    background-color:            transparent;
+    text-color:                  @onBackground;
+    cursor:                      "default";
+}
+scrollbar {
+    handle-width:                5px ;
+    handle-color:                @primaryContainer;
+    border-radius:               10px;
+    background-color:            @surface;
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    spacing:                     0px;
+    margin:                      0px;
+    padding:                     8px;
+    border:                      0px solid;
+    border-radius:               12px;
+    border-color:                @primaryContainer;
+    background-color:            transparent;
+    text-color:                  @onBackground;
+    cursor:                      pointer;
+}
+element normal.normal {
+    background-color:            @background;
+    text-color:                  @onBackground;
+}
+element normal.urgent {
+    background-color:            @error;
+    text-color:                  @onError;
+}
+element normal.active {
+    background-color:            @primary;
+    text-color:                  @onPrimary;
+}
+element selected.normal {
+    background-color:            @primaryContainer;
+    text-color:                  @onPrimaryContainer;
+}
+element selected.urgent {
+    background-color:            @error;
+    text-color:                  @onError;
+}
+element selected.active {
+    background-color:            @primary;
+    text-color:                  @onPrimary;
+}
+element alternate.normal {
+    background-color:            @surface;
+    text-color:                  @onSurface;
+}
+element alternate.urgent {
+    background-color:            @error;
+    text-color:                  @onError;
+}
+element alternate.active {
+    background-color:            @primary;
+    text-color:                  @onPrimary;
+}
+element-icon {
+    background-color:            transparent;
+    text-color:                  inherit;
+    size:                        20px;
+    cursor:                      inherit;
+}
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    highlight:                   inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}
+
+/*****----- Message -----*****/
+message {
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     8px 10px;
+    border:                      0px solid;
+    border-radius:               8px;
+    border-color:                @primaryContainer;
+    background-color:            @surface;
+    text-color:                  @onBackground;
+}
+textbox {
+    border:                      0px solid;
+    border-color:                @primaryContainer;
+    background-color:            transparent;
+    text-color:                  @onBackground;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+    highlight:                   none;
+    placeholder-color:           @onBackground;
+    blink:                       true;
+    markup:                      true;
+}
+error-message {
+    padding:                     15px;
+    border:                      0px solid;
+    border-radius:               10px;
+    border-color:                @primaryContainer;
+    background-color:            @background;
+    text-color:                  @onBackground;
+}

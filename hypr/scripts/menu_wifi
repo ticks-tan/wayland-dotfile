@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+dir="${HOME}/.config/hypr/menu/rofi"
+wifi_theme="wifi"
+passwd_theme="askpass"
+
+function get_password() {
+    echo $(rofi -dmenu -p "Input Password" -password -theme ${dir}/${passwd_theme}.rasi)
+}
+
+bssid=$(nmcli device wifi rescan && nmcli device wifi list | sed -n '1!P'| cut -b 9- | rofi -dmenu -theme ${dir}/${wifi_theme}.rasi -p "wifi" -lines 10 | awk '{print $1}')
+[ -z "${bssid}" ] && exit 1
+
+passwd=`get_password`
+
+nmcli device wifi connect ${bssid} password ${passwd}

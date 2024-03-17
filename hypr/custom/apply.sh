@@ -22,7 +22,6 @@ source ${THEME_DIR}/system.sh
 source ${THEME_DIR}/color.sh
 source ${THEME_DIR}/theme.sh
 
-PATH_CLS="${HOME}/.cache/wal"
 PATH_CONF="${HOME}/.config"
 PATH_BAR="${HYPRDIR}/bar/waybar"
 PATH_TERM="${HYPRDIR}/term/alacritty"
@@ -36,12 +35,14 @@ if [[ ! -f "${wallpaper_path}" ]]; then
 	auto_color="false"
 fi
 
-wal_cmd() {
+get_color_cmd() {
 	if [[ "${color_scheme}" == "light" ]]; then
-		wal -i "${wallpaper_path}" -l -n -q -s -t -e
+		${HYPRDIR}/scripts/md-color -f "${wallpaper_path}" -o "${THEME_DIR}/color.sh"
 	else
-		wal -i "${wallpaper_path}" -n -q -s -t -e
+		${HYPRDIR}/scripts/md-color -f "${wallpaper_path}" -o "${THEME_DIR}/color.sh" --dark
 	fi
+	sed -i -E "s|=#(.{6})|=\"\1\"|g" ${THEME_DIR}/color.sh
+	source ${THEME_DIR}/color.sh
 }
 
 apply_wallpaper() {
@@ -50,57 +51,56 @@ apply_wallpaper() {
 }
 
 apply_bar() {
-	if [[ "${auto_color}" != "true" ]]; then
-		cat >${PATH_BAR}/color.css <<-EOF
+	cat >${PATH_BAR}/color.css <<-EOF
+@define-color background #${background};
+@define-color onBackground #${onBackground};
 
-			    @define-color background   #${background};
-			    @define-color foreground   #${foreground};
+@define-color primary #${primary};
+@define-color secondary #${secondary};
+@define-color tertiary #${tertiary};
+@define-color error #${error};
+@define-color primaryContainer #${primaryContainer};
+@define-color secondaryContainer #${secondaryContainer};
+@define-color tertiaryContainer #${tertiaryContainer};
+@define-color errorContainer #${errorContainer};
+@define-color surfaceDim #${surfaceDim};
+@define-color surface #${surface};
+@define-color surfaceBright #${surfaceBright};
+@define-color surfaceContainer #${surfaceContainer};
+@define-color outline #${outline};
+@define-color shadow #${shadow};
+@define-color inversePrimary #${inversePrimary};
+@define-color inverseSurface #${inverseSurface};
 
-			    @define-color color0  #${color0};
-			    @define-color color1  #${color1};
-			    @define-color color2  #${color2};
-			    @define-color color3  #${color3};
-			    @define-color color4  #${color4};
-			    @define-color color5  #${color5};
-			    @define-color color6  #${color6};
-			    @define-color color7  #${color7};
-
-			    @define-color color8   #${color8};
-			    @define-color color9   #${color9};
-			    @define-color color10  #${color10};
-			    @define-color color11  #${color11};
-			    @define-color color12  #${color12};
-			    @define-color color13  #${color13};
-			    @define-color color14  #${color14};
-			    @define-color color15  #${color15};
-		EOF
-	else
-		cp ${PATH_CLS}/waybar_color.css ${PATH_BAR}/color.css
-	fi
+@define-color onPrimary #${onPrimary};
+@define-color onSecondary #${onSecondary};
+@define-color onTertiary #${onTertiary};
+@define-color onError #${onError};
+@define-color onPrimaryContainer #${onPrimaryContainer};
+@define-color onSecondaryContainer #${onSecondaryContainer};
+@define-color onTertiaryContainer #${onTertiaryContainer};
+@define-color onErrorContainer #${onErrorContainer};
+@define-color onSurface #${onSurface};
+@define-color scrim #${scrim};
+	EOF
 }
 
 apply_menu() {
 	sed -i -e "s@font:.*@font: \"${menu_font}\";@g" ${PATH_MENU}/shared/fonts.rasi
-	if [[ "${auto_color}" != "true" ]]; then
-		cat >${PATH_MENU}/shared/colors.rasi <<-EOF
-			* {
-			     background:     #${background};
-			     background-alt: #${color8};
-			     foreground:     #${foreground};
-			     selected:       #${color5};
-			     active:         #${color3};
-			     urgent:         #${color1};
-			}
-		EOF
-	else
-		cp ${PATH_CLS}/rofi_color.rasi ${PATH_MENU}/shared/colors.rasi
-	fi
+	cat >${PATH_MENU}/shared/colors.rasi <<-EOF
+* {
+	background:         #${background};
+	surface:            #${surface};
+	onSurface:          #${onSurface};
+	onBackground:       #${onBackground};
+	primaryContainer:   #${primaryContainer};
+	onPrimaryContainer: #${onPrimaryContainer};
+	primary:            #${primary};
+	onPrimary:          #${onPrimary};
+	error:              #${error};
+	onError:            #${onError};
 }
-
-apply_netmenu() {
-	if [[ -f "$PATH_CONF"/networkmanager-dmenu/nmd.ini ]]; then
-		sed -i -e "s#dmenu_command = .*#dmenu_command = rofi -dmenu -theme ${PATH_MENU}/networkmenu.rasi#g" ${PATH_CONF}/networkmanager-dmenu/nmd.ini
-	fi
+	EOF
 }
 
 apply_terminal() {
@@ -108,77 +108,72 @@ apply_terminal() {
 		-e "s@family=.*@family=\"${term_font}\"@g" \
 		-e "s@size=.*@size=${term_font_size}@g"
 
-	# alacritty : colors
-	if [[ "${auto_color}" != "true" ]]; then
-		cat >${PATH_TERM}/colors.toml <<-_EOF_
+	cat >${PATH_TERM}/colors.toml <<-_EOF_
 # Default colors
 [colors.primary]
 background="#${background}"
-foreground="#${foreground}"
-dim_foreground="#${color15}"
-bright_foreground="#${foreground}"
+foreground="#${onBackground}"
+dim_foreground="#${onSurface}"
+bright_foreground="#${onSurface}"
 
 # Cursor colors
 [colors.cursor]
 text="#${background}"
-cursor="#${foreground}"
+cursor="#${onBackground}"
 
 [colors.vi_mode_cursor]
 text="#${background}"
-cursor="#${color2}"
+cursor="#${onBackground}"
 
 # Search colors
 [colors.search]
-matches.foreground="#${background}"
-matches.background="#${color8}"
-focused_match.foreground="#${background}"
-focused_match.background="#${color2}"
+matches.foreground="#${onSurface}"
+matches.background="#${surfaceContainer}"
+focused_match.foreground="#${surfaceContainer}"
+focused_match.background="#${onSurface}"
 
 [colors.footer_bar]
-foreground="#${background}"
-background="#${color8}"
+foreground="#${onBackground}"
+background="#${background}"
 
 # Selection colors
 [colors.selection]
 text="#${background}"
-background="#${color3}"
+background="#${onBackground}"
 
 # Normal colors
 [colors.normal]
-black="#${color0}"
-red="#${color1}"
-green="#${color2}"
-yellow="#${color3}"
-blue="#${color4}"
-magenta="#${color5}"
-cyan="#${color6}"
-white="#${color7}"
+black="#11111b"
+red="#d20f39"
+green="#40a02b"
+yellow="#df8e1d"
+blue="#1e66f5"
+magenta="#8839ef"
+cyan="#9ca0b0"
+white="#eff1f5"
 
 # Bright colors
 [colors.bright]
-black="#${color8}"
-red="#${color9}"
-green="#${color10}"
-yellow="#${color11}"
-blue="#${color12}"
-magenta="#${color13}"
-cyan="#${color14}"
-white="#${color15}"
+black="#11111b"
+red="#d20f39"
+green="#40a02b"
+yellow="#df8e1d"
+blue="#1e66f5"
+magenta="#8839ef"
+cyan="#9ca0b0"
+white="#eff1f5"
 
 # Dim colors
 [colors.dim]
-black="#${color8}"
-red="#${color9}"
-green="#${color10}"
-yellow="#${color11}"
-blue="#${color12}"
-magenta="#${color13}"
-cyan="#${color14}"
-white="#${color15}"
-		_EOF_
-	else
-		cp ${PATH_CLS}/alacritty_color.yml ${PATH_TERM}/colors.yml
-	fi
+black="#11111b"
+red="#d20f39"
+green="#40a02b"
+yellow="#df8e1d"
+blue="#1e66f5"
+magenta="#8839ef"
+cyan="#9ca0b0"
+white="#eff1f5"
+	_EOF_
 }
 
 apply_gtk() {
@@ -209,29 +204,25 @@ apply_notifyd() {
 		-e "s/frame_width = .*/frame_width = $notify_border/g"
 
 	sed -i '/urgency_low/Q' ${PATH_NOTIFY}/dunstrc
-	if [[ "${auto_color}" != "true" ]]; then
-		cat >>${PATH_NOTIFY}/dunstrc <<-_EOF_
-			[urgency_low]
-			timeout = 2
-			background = "#${background}"
-			foreground = "#${foreground}"
-			frame_color = "#${color5}"
+	cat >>${PATH_NOTIFY}/dunstrc <<-_EOF_
+		[urgency_low]
+		timeout = 2
+		background = "#${background}"
+		foreground = "#${onBackground}"
+		frame_color = "#${surfaceContainer}"
 
-			[urgency_normal]
-			timeout = 5
-			background = "#${background}"
-			foreground = "#${foreground}"
-			frame_color = "#${color5}"
+		[urgency_normal]
+		timeout = 5
+		background = "#${background}"
+		foreground = "#${onBackground}"
+		frame_color = "#${surfaceContainer}"
 
-			[urgency_critical]
-			timeout = 0
-			background = "#${background}"
-			foreground = "#${foreground}"
-			frame_color = "#${color5}"
-		_EOF_
-	else
-		cat ${PATH_CLS}/dunst_color.toml >>${PATH_NOTIFY}/dunstrc
-	fi
+		[urgency_critical]
+		timeout = 0
+		background = "#${error}"
+		foreground = "#${onError}"
+		frame_color = "#${surfaceContainer}"
+	_EOF_
 }
 
 apply_wm() {
@@ -249,7 +240,9 @@ apply_wm() {
 		-e "s@\$hypr_anim_enable[ ]*=.*@\$hypr_anim_enable = ${hypr_anim_enable}@g" \
 		-e "s@\$hypr_anim_resize[ ]*=.*@\$hypr_anim_resize = ${hypr_anim_resize}@g" \
 		-e "s@\$hypr_dis_random_logo[ ]*=.*@\$hypr_dis_random_logo = ${hypr_dis_random_logo}@g" \
-		-e "s@\$hypr_dis_autoreload[ ]*=.*@\$hypr_dis_autoreload = ${hypr_dis_autoreload}@g" \
+		-e "s@\$hypr_dis_autoreload[ ]*=.*@\$hypr_dis_autoreload = ${hypr_dis_autoreload}@g"
+
+	sed -i ${HYPRDIR}/hyprland/env.conf \
 		-e "s@env=GDK_SCALE,.*@env=GDK_SCALE,${gtk_scale}@g" \
 		-e "s@env=GDK_DPI_SCALE,.*@env=GDK_DPI_SCALE,${gtk_dpi_scale}@g" \
 		-e "s@env=GTK_THEME,.*@env=GTK_THEME,${gtk_theme}@g" \
@@ -257,31 +250,48 @@ apply_wm() {
 		-e "s@env=XCURSOR_SIZE,.*@env=XCURSOR_SIZE,${cursor_size}@g" \
 		-e "s@env=QT_WAYLAND_FORCE_DPI,.*@env=QT_WAYLAND_FORCE_DPI,${qt_wayland_dpi}@g"
 
-	if [[ "${auto_color}" != "true" ]]; then
-		cat >${HYPRDIR}/hypr_color.conf <<-_EOF_
-			\$background = ${background}
-			\$foreground = ${foreground}
+	cat >${HYPRDIR}/hyprland/color.conf <<-_EOF_
+# ___________________________________________________________________________________________________ #
+#     _     _ #
+#     /    /                            /                      /                      / #
+# ---/___ /---------------__----)__----/-----__-----__-----__-/---------__-----__----/-----__----)__- #
+#   /    /     /   /    /   )  /   )  /    /   )  /   )  /   /        /   '  /   )  /    /   )  /   ) #
+# _/____/_____(___/____/___/__/______/____(___(__/___/__(___/________(___ __(___/__/____(___/__/_____ #
+#                /    / #
+#            (_ /    / #
 
-			\$color0     = ${color0}
-			\$color1     = ${color1}
-			\$color2     = ${color2}
-			\$color3     = ${color3}
-			\$color4     = ${color4}
-			\$color5     = ${color5}
-			\$color6     = ${color6}
-			\$color7     = ${color7}
-			\$color8     = ${color8}
-			\$color9     = ${color9}
-			\$color10    = ${color10}
-			\$color11    = ${color11}
-			\$color12    = ${color12}
-			\$color13    = ${color13}
-			\$color14    = ${color14}
-			\$color15    = ${color15}
-		_EOF_
-	else
-		cp ${PATH_CLS}/hypr_color.conf ${HYPRDIR}/hypr_color.conf
-	fi
+
+\$background=${background}
+\$onBackground=${onBackground}
+
+\$primary=${primary}
+\$secondary=${secondary}
+\$tertiary=${tertiary}
+\$error=${error}
+\$primaryContainer=${primaryContainer}
+\$secondaryContainer=${secondaryContainer}
+\$tertiaryContainer=${tertiaryContainer}
+\$errorContainer=${errorContainer}
+\$surfaceDim=${surfaceDim}
+\$surface=${surface}
+\$surfaceBright=${surfaceBright}
+\$surfaceContainer=${surfaceContainer}
+\$outline=${outline}
+\$shadow=${shadow}
+\$inversePrimary=${inversePrimary}
+\$inverseSurface=${inverseSurface}
+
+\$onPrimary=${onPrimary}
+\$onSecondary=${onSecondary}
+\$onTertiary=${onTertiary}
+\$onError=${onError}
+\$onPrimaryContainer=${onPrimaryContainer}
+\$onSecondaryContainer=${onSecondaryContainer}
+\$onTertiaryContainer=${onTertiaryContainer}
+\$onErrorContainer=${onErrorContainer}
+\$onSurface=${onSurface}
+\$scrim=${scrim}
+	_EOF_
 	hyprctl reload
 }
 
@@ -299,35 +309,34 @@ notify_user() {
 confirm_cmd() {
 	rofi -dmenu \
 		-p 'Change your theme' \
-		-mesg 'Are you Sure?' \
+		-mesg 'Are you Sure to change your theme ?' \
 		-markup-rows \
 		-theme ${PATH_MENU}/confirm.rasi
 }
 
 confirm_run() {
-	yes=' Yes'
-	no=' No'
+	yes='󰗡 Yes'
+	no='󰅙 No'
 
 	selected="$(echo -e "${yes}\n${no}" | confirm_cmd)"
 	if [[ "${selected}" == "${yes}" ]]; then
 		if [[ "${auto_color}" == "true" ]]; then
-			wal_cmd
+			get_color_cmd
 		fi
-		notify_user "Theme Changed"
 		apply_wallpaper
-		apply_netmenu
 		apply_bar
 		patch_bar
 		apply_menu
 		apply_terminal
 		apply_gtk
 		apply_notifyd
-		apply_wm
 		cat ${HYPRDIR}/custom/theme.sh >${HYPRDIR}/.current
+		apply_wm
+		notify_user "Theme Changed"
 	else
 		notify_user "Theme Not Changed"
 	fi
 }
 
-####################
+
 confirm_run
