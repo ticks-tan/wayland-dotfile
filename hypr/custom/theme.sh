@@ -10,11 +10,11 @@
 ## Wallpaper
 ## 需要 锁屏使用壁纸则需要设置为绝对路径！
 #########################
-wallpaper_path="~/.local/share/wallpaper/bg1.png"
+wallpaper_path="~/.local/share/wallpaper/bg4.png"
 ## 是否从壁纸获取颜色
 auto_color="true"
 ## 颜色主题模式(light / dark)
-color_scheme="light"
+color_scheme="dark"
 
 #########################
 ## Menu
@@ -38,17 +38,17 @@ qt_wayland_dpi=120
 ## GTK
 #######################
 ## 应用主题
-gtk_theme="Catppuccin-Macchiato"
+gtk_theme="Orchis-Dark"
 ## 应用字体大小
-gtk_font="Sarasa UI SC 12"
+gtk_font="LXGW WenKai GB Screen 12"
 ## 图标主题
-gtk_icon_theme="Win11"
-## 光标主题
-gtk_cursor_theme="Catppuccin-Macchiato-Light"
+gtk_icon_theme="Win10Sur-black-dark"
 ## Gtk 缩放(整数)
 gtk_scale=1
 ## Gtk dpi 缩放(支持分数)
-gtk_dpi_scale=1.5
+gtk_dpi_scale=1.25
+## 光标主题
+cursor_theme="Bibata-Modern-Ice"
 ## 鼠标大小
 cursor_size=24
 

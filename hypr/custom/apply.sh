@@ -36,6 +36,7 @@ if [[ ! -f "${wallpaper_path}" ]]; then
 fi
 
 get_color_cmd() {
+	echo "get color from image: ${wallpaper_path} -> ${THEME_DIR}/color.sh"
 	if [[ "${color_scheme}" == "light" ]]; then
 		${HYPRDIR}/scripts/md-color -f "${wallpaper_path}" -o "${THEME_DIR}/color.sh"
 	else
@@ -183,17 +184,17 @@ apply_gtk() {
 
 	sed -i -e "s|Net/ThemeName .*|Net/ThemeName \"$gtk_theme\"|g" ${XFILE}
 	sed -i -e "s|Net/IconThemeName .*|Net/IconThemeName \"$gtk_icon_theme\"|g" ${XFILE}
-	sed -i -e "s|Gtk/CursorThemeName .*|Gtk/CursorThemeName \"$gtk_cursor_theme\"|g" ${XFILE}
+	sed -i -e "s|Gtk/CursorThemeName .*|Gtk/CursorThemeName \"$cursor_theme\"|g" ${XFILE}
 
 	sed -i -e "s|gtk-font-name=.*|gtk-font-name=\"$gtk_font\"|g" ${GTK2FILE}
 	sed -i -e "s|gtk-theme-name=.*|gtk-theme-name=\"$gtk_theme\"|g" ${GTK2FILE}
 	sed -i -e "s|gtk-icon-theme-name=.*|gtk-icon-theme-name=\"$gtk_icon_theme\"|g" ${GTK2FILE}
-	sed -i -e "s|gtk-cursor-theme-name=.*|gtk-cursor-theme-name=\"$gtk_cursor_theme\"|g" ${GTK2FILE}
+	sed -i -e "s|gtk-cursor-theme-name=.*|gtk-cursor-theme-name=\"$cursor_theme\"|g" ${GTK2FILE}
 
 	sed -i -e "s|gtk-font-name=.*|gtk-font-name=$gtk_font|g" ${GTK3FILE}
 	sed -i -e "s|gtk-theme-name=.*|gtk-theme-name=$gtk_theme|g" ${GTK3FILE}
 	sed -i -e "s|gtk-icon-theme-name=.*|gtk-icon-theme-name=$gtk_icon_theme|g" ${GTK3FILE}
-	sed -i -e "s|gtk-cursor-theme-name=.*|gtk-cursor-theme-name=$gtk_cursor_theme|g" ${GTK3FILE}
+	sed -i -e "s|gtk-cursor-theme-name=.*|gtk-cursor-theme-name=$cursor_theme|g" ${GTK3FILE}
 }
 
 apply_notifyd() {
@@ -246,9 +247,11 @@ apply_wm() {
 		-e "s@env=GDK_SCALE,.*@env=GDK_SCALE,${gtk_scale}@g" \
 		-e "s@env=GDK_DPI_SCALE,.*@env=GDK_DPI_SCALE,${gtk_dpi_scale}@g" \
 		-e "s@env=GTK_THEME,.*@env=GTK_THEME,${gtk_theme}@g" \
-		-e "s@env=XCURSOR_THEME,.*@env=XCURSOR_THEME,${gtk_cursor_theme}@g" \
+		-e "s@env=XCURSOR_THEME,.*@env=XCURSOR_THEME,${cursor_theme}@g" \
 		-e "s@env=XCURSOR_SIZE,.*@env=XCURSOR_SIZE,${cursor_size}@g" \
-		-e "s@env=QT_WAYLAND_FORCE_DPI,.*@env=QT_WAYLAND_FORCE_DPI,${qt_wayland_dpi}@g"
+		-e "s@env=QT_WAYLAND_FORCE_DPI,.*@env=QT_WAYLAND_FORCE_DPI,${qt_wayland_dpi}@g" \
+		-e "s@env=HYPRCURSOR_SIZE,.*@env=HYPRCURSOR_SIZE,${cursor_size}@g" \
+		-e "s@env=HYPRCURSOR_THEME,.*@env=HYPRCURSOR_THEME,${cursor_theme}@g"
 
 	cat >${HYPRDIR}/hyprland/color.conf <<-_EOF_
 # ___________________________________________________________________________________________________ #

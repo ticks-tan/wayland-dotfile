@@ -20,19 +20,20 @@ fi
 
 import_gtk3_theme() {
 	config="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-3.0/settings.ini"
-	if [ ! -f "$config" ]; then
-		return
+	gnome_schema="org.gnome.desktop.interface"
+
+	if [ -f "$config" ]; then
+		local gtk_theme="$(grep 'gtk-theme-name' "$config" | sed 's/.*\s*=\s*//')"
+		local icon_theme="$(grep 'gtk-icon-theme-name' "$config" | sed 's/.*\s*=\s*//')"
+		local cursor_theme="$(grep 'gtk-cursor-theme-name' "$config" | sed 's/.*\s*=\s*//')"
+		local gtk_font="$(grep 'gtk-font-name' "$config" | sed 's/.*\s*=\s*//')"
 	fi
 
-	gnome_schema="org.gnome.desktop.interface"
-	gtk_theme="$(grep 'gtk-theme-name' "$config" | sed 's/.*\s*=\s*//')"
-	icon_theme="$(grep 'gtk-icon-theme-name' "$config" | sed 's/.*\s*=\s*//')"
-	cursor_theme="$(grep 'gtk-cursor-theme-name' "$config" | sed 's/.*\s*=\s*//')"
-	font_name="$(grep 'gtk-font-name' "$config" | sed 's/.*\s*=\s*//')"
 	gsettings set "$gnome_schema" gtk-theme "$gtk_theme"
 	gsettings set "$gnome_schema" icon-theme "$icon_theme"
 	gsettings set "$gnome_schema" cursor-theme "$cursor_theme"
-	gsettings set "$gnome_schema" font-name "$font_name"
+	gsettings set "$gnome_schema" font-name "$gtk_font"
+	gsettings set "$gnome_schema" cursor-size "$cursor_size"
 }
 
 set_xdg_desktop() {
@@ -65,6 +66,7 @@ start_always() {
 	killall -9 hyprpaper
 
 	if [[ "${hypr_dis_random_logo}" == "true" ]]; then
+		echo "show the custom wallpaper!"
 		hyprpaper &
 	fi
 
